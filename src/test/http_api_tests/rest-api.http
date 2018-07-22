@@ -1,0 +1,37 @@
+GET http://localhost:8080/api/notes
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-07-22T095928.200.json
+<> 2018-07-22T095534.200.json
+
+###
+
+GET http://localhost:8080/api/customers
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-07-22T104426.200.json
+
+###
+
+
+GET http://localhost:8080/api/customers?address=Ho%20Chi%20Minh
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-07-22T110309.200.json
+<> 2018-07-22T110251.200.json
+<> 2018-07-22T104426.200.json
+
+###
+GET http://localhost:8080/api/customers?address=Ha%20Noi
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-07-22T110323.200.json
+<> 2018-07-22T110309.200.json
+<> 2018-07-22T110251.200.json
+<> 2018-07-22T104426.200.json
+
+###
