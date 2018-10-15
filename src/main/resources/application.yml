@@ -4,7 +4,7 @@
 spring:
   datasource:
 
-    url: jdbc:mysql://localhost:3306/webapp
+    url: jdbc:mysql://127.0.0.1:3306/webapp
     username: webapp
     password: webapp
 
@@ -18,13 +18,3 @@ spring:
     database-platform: MYSQL
     properties:
       hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-
-# ===============================
-# = Logging configurations
-# ===============================
-logging:
-  level:
-    root: WARN
-    com.memorynotfound: DEBUG
-    org.springframework.web: INFO
-    org.springframework.security: INFO

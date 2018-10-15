@@ -1,0 +1,16 @@
+version: '2.3'
+
+services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb:10.3.8
+    environment:
+      MYSQL_ROOT_PASSWORD: webapp
+      MYSQL_DATABASE: webapp
+      MYSQL_USER: webapp
+      MYSQL_PASSWORD: webapp
+    volumes:
+    - ${PWD}/mariadb:/var/lib/mysql
+    ports:
+      - 3306:3306
+    restart: always

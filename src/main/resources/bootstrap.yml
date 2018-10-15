@@ -1,6 +1,5 @@
 server:
-  port: 8088
+  port: 8060
 spring:
   application:
-    name: comments-webservice
-# Name of the service that is using with Zuul routes to forward specific requests to this service
+    name: webapp-service
