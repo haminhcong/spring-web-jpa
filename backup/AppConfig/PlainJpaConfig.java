@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.spring.webapp.AppConfig;
+package com.spring.service.AppConfig;
 
-import com.spring.webapp.repository.core.Customer;
+import com.spring.service.repository.core.Customer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Import;
 
 /**
  * JavaConfig class to activate component scanning to pick up
- * {@link com.spring.webapp.repository.core.JpaCustomerRepository}. Re-uses the common infrastructure configuration
+ * {@link com.spring.service.repository.core.JpaCustomerRepository}. Re-uses the common infrastructure configuration
  * defined in {@link InfrastructureConfig}.
  * 
  * @author Oliver Gierke

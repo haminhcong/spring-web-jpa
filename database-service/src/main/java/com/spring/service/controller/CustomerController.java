@@ -1,7 +1,7 @@
-package com.spring.webapp.controller;
+package com.spring.service.controller;
 
-import com.spring.webapp.entity.Customer;
-import com.spring.webapp.repository.CustomerRepository;
+import com.spring.service.entity.Customer;
+import com.spring.service.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

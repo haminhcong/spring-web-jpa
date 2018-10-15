@@ -1,10 +1,10 @@
-package com.spring.webapp;
+package com.spring.service;
 
-import com.spring.webapp.data_type.PhoneNumber;
-import com.spring.webapp.entity.Customer;
-import com.spring.webapp.entity.Note;
-import com.spring.webapp.repository.CustomerRepository;
-import com.spring.webapp.repository.NoteRepository;
+import com.spring.service.data_type.PhoneNumber;
+import com.spring.service.entity.Customer;
+import com.spring.service.entity.Note;
+import com.spring.service.repository.CustomerRepository;
+import com.spring.service.repository.NoteRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

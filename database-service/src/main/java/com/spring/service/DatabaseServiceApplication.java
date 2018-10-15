@@ -1,12 +1,12 @@
-package com.spring.webapp;
+package com.spring.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WebappApplication {
+public class DatabaseServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WebappApplication.class, args);
+		SpringApplication.run(DatabaseServiceApplication.class, args);
 	}
 }

@@ -1,4 +1,4 @@
-package com.spring.webapp.data_type;
+package com.spring.service.data_type;
 
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;

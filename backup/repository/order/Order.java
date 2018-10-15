@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.spring.webapp.repository.order;
+package com.spring.service.repository.order;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -27,8 +27,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.spring.webapp.repository.core.Address;
-import com.spring.webapp.repository.core.Customer;
+import com.spring.service.repository.core.Address;
+import com.spring.service.repository.core.Customer;
 import org.dom4j.tree.AbstractEntity;
 import org.springframework.util.Assert;
 

@@ -1,6 +1,6 @@
-package com.spring.webapp.entity;
+package com.spring.service.entity;
 
-import com.spring.webapp.data_type.PhoneNumber;
+import com.spring.service.data_type.PhoneNumber;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +22,7 @@ public class Customer {
     private String userName;
     @Column(name = "address")
     private String address;
-    @Type(type = "com.spring.webapp.data_type.PhoneNumberType")
+    @Type(type = "com.spring.service.data_type.PhoneNumberType")
     @Column(name = "phone_number")
     private PhoneNumber phoneNumber;
 }

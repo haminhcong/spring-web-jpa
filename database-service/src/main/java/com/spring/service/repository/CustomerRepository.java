@@ -1,6 +1,6 @@
-package com.spring.webapp.repository;
+package com.spring.service.repository;
 
-import com.spring.webapp.entity.Customer;
+import com.spring.service.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.spring.webapp.repository.order;
+package com.spring.service.repository.order;
 
-import com.spring.webapp.repository.core.Customer;
+import com.spring.service.repository.core.Customer;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;

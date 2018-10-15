@@ -1,4 +1,4 @@
-package com.spring.webapp.data_type;
+package com.spring.service.data_type;
 
 
 import lombok.AllArgsConstructor;

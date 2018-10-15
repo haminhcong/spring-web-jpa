@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.spring.webapp.repository.core;
+package com.spring.service.repository.core;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import com.spring.webapp.repository.core.Customer;
+import com.spring.service.repository.core.Customer;
 import org.springframework.stereotype.Repository;
 
 /**

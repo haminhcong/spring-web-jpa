@@ -1,8 +1,8 @@
-package com.spring.webapp.controller;
+package com.spring.service.controller;
 
 
-import com.spring.webapp.entity.Note;
-import com.spring.webapp.repository.NoteRepository;
+import com.spring.service.entity.Note;
+import com.spring.service.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

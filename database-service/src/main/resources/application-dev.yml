@@ -1,0 +1,27 @@
+server:
+  port: 8089
+
+
+# ===============================
+# = Hibernate datasource
+# ===============================
+spring:
+  application:
+    name: db-service
+
+  datasource:
+
+    url: jdbc:mysql://127.0.0.1:3306/db_service
+    username: db_service
+    password: db_service
+
+  # ===============================
+  # = JPA configurations
+  # ===============================
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: MYSQL
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
