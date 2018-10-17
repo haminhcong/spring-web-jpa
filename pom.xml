@@ -12,5 +12,7 @@
     <modules>
         <module>database-service</module>
         <module>configuration-service</module>
+        <module>gateway-service</module>
+        <module>discovery-service</module>
     </modules>
 </project>

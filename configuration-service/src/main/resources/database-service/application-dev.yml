@@ -1,6 +1,12 @@
 server:
   port: 8070
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8061/eureka/
+    registerWithEureka: true
+    fetchRegistry: true
 
 # ===============================
 # = Hibernate datasource
