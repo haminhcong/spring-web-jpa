@@ -10,9 +10,12 @@
     <description>Demo project for Spring Web Service Multi Module</description>
 
     <modules>
-        <module>database-service</module>
         <module>configuration-service</module>
         <module>gateway-service</module>
         <module>discovery-service</module>
+        <!--micro services-->
+        <module>customer-service</module>
+        <module>item-service</module>
+        <module>order-service</module>
     </modules>
 </project>

@@ -4,15 +4,15 @@ spring:
   cloud:
     config:
       uri: http://localhost:8088
-
-debug: true
-trace: true
-logging:
-  level:
-    org:
-      springframework:
-        cloud:
-          netflix: trace
+#
+#debug: true
+#trace: true
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        cloud:
+#          netflix: trace
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 220000
 ribbon:
   ConnectTimeout: 40000
@@ -26,4 +26,12 @@ management:
 
 zuul:
   semaphore:
-    max-semaphores: 150
+    max-semaphores: 200
+  prefix: /api
+  routes:
+    account:
+      path: /customer/**
+      serviceId: customer-service
+    order:
+      path: /order/**
+      serviceId: order-service

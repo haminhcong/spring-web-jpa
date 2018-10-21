@@ -7,10 +7,3 @@ eureka:
       defaultZone: http://localhost:8061/eureka/
     registerWithEureka: true
     fetchRegistry: true
-
-zuul:
-  prefix: /api
-  routes:
-    account:
-      path: /database/**
-      serviceId: database-service
