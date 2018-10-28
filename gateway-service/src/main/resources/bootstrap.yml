@@ -4,26 +4,3 @@ spring:
   cloud:
     config:
       uri: http://localhost:8088
-
-debug: true
-trace: true
-logging:
-  level:
-    org:
-      springframework:
-        cloud:
-          netflix: trace
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 220000
-ribbon:
-  ConnectTimeout: 40000
-  ReadTimeout: 40000
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: hystrix.stream
-
-zuul:
-  semaphore:
-    max-semaphores: 150

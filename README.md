@@ -22,3 +22,10 @@ System contains three micro services: customer-service, item-service and order-s
 - Item service:
   - Show item list.
   - Show item info. In item info show order list order this item.
+  
+## Benchmark performance
+
+
+```bash
+docker run --rm williamyeh/wrk -t4 -c100 -d500s -H 'Host: example.com' --latency --timeout 30s http://192.168.120.1:8060/api/customer/customers\?address\=Ha%20Noi
+```

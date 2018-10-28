@@ -13,20 +13,16 @@ spring:
 #      springframework:
 #        cloud:
 #          netflix: trace
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 220000
-ribbon:
-  ConnectTimeout: 40000
-  ReadTimeout: 40000
 
 management:
   endpoints:
     web:
       exposure:
-        include: hystrix.stream
+        include: "*"
 
 zuul:
   semaphore:
-    max-semaphores: 200
+    max-semaphores: 350
   prefix: /api
   routes:
     account:
@@ -35,3 +31,28 @@ zuul:
     order:
       path: /order/**
       serviceId: order-service
+#  ribbon-isolation-strategy: semaphore
+  ribbon-isolation-strategy: THREAD
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
+hystrix.threadpool.default.coreSize: 120
+hystrix.threadpool.default.maximumSize: 120
+hystrix.command.default.circuitBreaker.enabled: false
+ribbon:
+  ReadTimeout: 4000
+  SocketTimeout: 4000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 0
+
+# performance with this settings: 10 req/sec
+#  MaxTotalConnections: 20
+#  MaxConnectionsPerHost: 10
+
+
+# performance with this settings: 20 req/sec
+#  MaxTotalConnections: 200
+#  MaxConnectionsPerHost: 20
+
+  # performance with this settings: 120 req/sec
+  MaxTotalConnections: 2000
+  MaxConnectionsPerHost: 200
