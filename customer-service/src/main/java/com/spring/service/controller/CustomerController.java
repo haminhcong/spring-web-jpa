@@ -2,6 +2,7 @@ package com.spring.service.controller;
 
 import com.spring.service.entity.Customer;
 import com.spring.service.repository.CustomerRepository;
+import com.spring.service.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +17,13 @@ import java.util.concurrent.TimeUnit;
 //@RequestMapping("/api")
 public class CustomerController {
     private CustomerRepository customerRepository;
+    private CustomerService customerService;
 
     @Autowired
-    public CustomerController(CustomerRepository customerRepository) {
+    public CustomerController(CustomerRepository customerRepository,
+                              CustomerService customerService) {
         this.customerRepository = customerRepository;
+        this.customerService =  customerService;
     }
 
     // Get All Customers
@@ -30,9 +34,14 @@ public class CustomerController {
 
     @GetMapping(value = "/customers", params = "address")
     public Customer getCustomersWithAddress(@RequestParam("address") String address) throws InterruptedException {
-        TimeUnit.MILLISECONDS.sleep(1000);
-        return new Customer();
-//        return customerRepository.findByAddress(address);
+        return customerService.findCustomerByAddress(address);
     }
+
+    @GetMapping(value = "/customers-full", params = "address")
+    public Customer getCustomerWithFullAddr(@RequestParam("address") String address) throws InterruptedException {
+        return customerService.findCustomerByAddressFull(address);
+
+    }
+
 
 }

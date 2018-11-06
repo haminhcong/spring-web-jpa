@@ -33,10 +33,19 @@ zuul:
       serviceId: order-service
 #  ribbon-isolation-strategy: semaphore
   ribbon-isolation-strategy: THREAD
+  threadPool:
+    useSeparateThreadPools: true
 
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
-hystrix.threadpool.default.coreSize: 120
-hystrix.threadpool.default.maximumSize: 120
+
+hystrix:
+  threadpool:
+    customer-service:
+      coreSize: 10
+      allowMaximumSizeToDivergeFromCoreSize: true
+      maximumSize: 40
+
+
 hystrix.command.default.circuitBreaker.enabled: false
 ribbon:
   ReadTimeout: 4000
