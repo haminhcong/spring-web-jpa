@@ -11,6 +11,8 @@ management:
       exposure:
         include: "*"
 
+
+
 hystrix:
   command:
     findCustomerByAddress:
@@ -23,4 +25,7 @@ hystrix:
     findCustomerByAddressPool:
       coreSize: 20
       allowMaximumSizeToDivergeFromCoreSize: true
-      maximumSize: 100
+      maximumSize: 600
+server:
+  tomcat:
+    max-threads: 700

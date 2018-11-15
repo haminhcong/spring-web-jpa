@@ -1,6 +1,7 @@
 package com.spring.service.controller;
 
 import com.spring.service.entity.Customer;
+import com.spring.service.exception.AppException;
 import com.spring.service.repository.CustomerRepository;
 import com.spring.service.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class CustomerController {
     public CustomerController(CustomerRepository customerRepository,
                               CustomerService customerService) {
         this.customerRepository = customerRepository;
-        this.customerService =  customerService;
+        this.customerService = customerService;
     }
 
     // Get All Customers
@@ -43,5 +44,18 @@ public class CustomerController {
 
     }
 
+    @GetMapping(value = "/update-customer", params = {"id", "address"})
+    public Customer updateCustomer(@RequestParam("id") Long id, @RequestParam("address") String address) {
+        try {
+            return customerService.updateCustomer(id, address);
+        } catch (AppException appEx) {
+            System.out.print(appEx.getMessage());
+            return null;
+        }
+    }
 
+    @GetMapping(value = "/customer", params = "id")
+    public Customer getCustomer(@RequestParam("id") Long id) {
+        return customerRepository.findById(id).orElse(null);
+    }
 }
