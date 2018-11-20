@@ -22,7 +22,7 @@ public class Customer {
     private String userName;
     @Column(name = "address")
     private String address;
-    @Type(type = "com.spring.service.data_type.PhoneNumberType")
     @Column(name = "phone_number")
-    private PhoneNumber phoneNumber;
+    private String phoneNumber;
+
 }
