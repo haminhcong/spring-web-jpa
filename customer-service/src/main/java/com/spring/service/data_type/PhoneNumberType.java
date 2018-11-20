@@ -12,9 +12,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.StringTokenizer;
 
-/**
- * @author Kunaal A Trehan
- */
+
 public class PhoneNumberType implements UserType {
 
     /**

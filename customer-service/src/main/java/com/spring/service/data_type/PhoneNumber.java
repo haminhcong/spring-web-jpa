@@ -5,14 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * User type class converting area code and phone number into one column in database
- * and vice versa.
- * In the UI area code and phone number have seperate place holders
- * But in database it wraps into one column.
- *
- * @author Kunaal A Trehan
- */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,9 +19,6 @@ public class PhoneNumber {
         return areaCode + "-" + areaPhoneNumber;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -40,9 +30,6 @@ public class PhoneNumber {
         return result;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

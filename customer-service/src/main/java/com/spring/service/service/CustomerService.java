@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
-import java.util.concurrent.TimeUnit;
-
 @Service
 public class CustomerService {
     private CustomerRepository customerRepository;
