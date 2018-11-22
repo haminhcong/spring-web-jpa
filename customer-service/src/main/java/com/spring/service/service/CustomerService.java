@@ -18,7 +18,7 @@ public class CustomerService {
     @Autowired
     public CustomerService(
             CustomerRepository customerRepository,
-            @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection") OrderClient orderClient) {
+            OrderClient orderClient) {
         this.customerRepository = customerRepository;
         this.orderClient = orderClient;
     }

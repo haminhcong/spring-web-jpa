@@ -1,11 +1,9 @@
 package com.spring.service.repository;
 
-import com.spring.service.entity.Note;
+import com.spring.service.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
-public interface NoteRepository extends JpaRepository<Note, Long> {
-    Note findByTitle(String tite);
+public interface OrderRepository extends JpaRepository<Order, Long> {
 }
