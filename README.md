@@ -215,7 +215,12 @@ Example:
 
 ## Benchmark performance
 
-
 ```bash
 docker run --rm williamyeh/wrk -t4 -c100 -d500s -H 'Host: example.com' --latency --timeout 30s http://192.168.120.1:8060/api/customer/customers\?address\=Ha%20Noi
 ```
+
+## References
+
+- https://stackoverflow.com/questions/35612778/database-schema-for-an-online-shop
+- http://www.erdiagrams.com/datamodel-online-shop-idef1x.html
+- https://pandaforme.gitbooks.io/introduction-to-cassandra/content/understand_the_cassandra_data_model.html
