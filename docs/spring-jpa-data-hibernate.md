@@ -2,7 +2,14 @@
 
 ## Problems:
 
-- Use paging and sorting in spring data jpa: https://www.logicbig.com/tutorials/spring-framework/spring-data/pagination.html
+- Use paging and sorting in spring data jpa: 
+  - https://www.logicbig.com/tutorials/spring-framework/spring-data/pagination.html
+  - https://www.logicbig.com/tutorials/spring-framework/spring-data/sorting-and-pagination.html
+- Spring data web support:
+  - https://www.logicbig.com/tutorials/spring-framework/spring-data/web-support-with-domain-class-converter.html 
+- Spring repository custom query
+  - https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.at-query
+  - https://stackoverflow.com/questions/10696490/does-spring-data-jpa-have-any-way-to-count-entites-using-method-name-resolving
 
 ## Book
 
