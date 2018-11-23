@@ -217,6 +217,10 @@ Example:
 
 - a Customer can only view his account information and his orders.
 
+## Paging and sorting
+
+- Use paging and sorting when process object list API for performance reason.
+
 ## Benchmark performance
 
 ```bash

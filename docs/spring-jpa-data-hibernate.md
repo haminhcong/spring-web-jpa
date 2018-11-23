@@ -1,5 +1,9 @@
 # Srping Data, JPA and Hibernate notes, documents and references
 
+## Problems:
+
+- Use paging and sorting in spring data jpa: https://www.logicbig.com/tutorials/spring-framework/spring-data/pagination.html
+
 ## Book
 
 - Pro-JPA-2-Mastering-the-Java-Persistence-API
