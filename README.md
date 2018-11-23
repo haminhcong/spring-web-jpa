@@ -213,6 +213,10 @@ Example:
   
 -> Reference database schema: http://www.erdiagrams.com/datamodel-online-shop-idef1x.jpg
 
+## Security
+
+- a Customer can only view his account information and his orders.
+
 ## Benchmark performance
 
 ```bash
