@@ -32,7 +32,7 @@ public class Order {
   private Long id;
 
   @Column(name = "customer_id")
-  private String customerID;
+  private Long customerID;
 
   @Column(name = "delivery_address")
   private String deliveryAddress;
@@ -40,9 +40,12 @@ public class Order {
   @Column(name = "email_address")
   private String emailAddress;
 
-  @Column(name = "purchase_date")
+  @Column(name = "orderDate")
   @Temporal(TemporalType.DATE)
-  private Date purchaseDate;
+  private Date orderDate;
+
+  @Column(name = "total_cost")
+  private Double totalCost;
 
   @ManyToOne
   @JoinColumn(name = "order_status_id")
@@ -50,4 +53,5 @@ public class Order {
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", orphanRemoval = true)
   private List<OrderedItem> orderedItemList = new ArrayList<>();
+
 }

@@ -24,6 +24,9 @@ public class OrderStatus {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
+  @Column(name = "order_status_code", unique = true)
+  private String orderStatusCode;
+
   @Column(name = "description")
   private String description;
 

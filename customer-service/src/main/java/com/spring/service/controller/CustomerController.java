@@ -27,7 +27,7 @@ public class CustomerController {
     }
 
     // TODO: Replace this API with session style
-    @GetMapping(value = "/customers", params = "id")
+    @GetMapping(value = "/customers")
     public CustomerDTO getCustomer(@RequestParam("id") Long id) {
         Customer customer = customerService.getCustomer(id);
         if (customer == null) throw new CustomerNotFoundException(id);

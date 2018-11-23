@@ -190,7 +190,7 @@ Example:
 - Show manufacture list
 - Show item info. In item info show order list order this item.
 - Show reviews about an item
-- Given a query contains propeties: product-type, and product-properties-value list, find all items satisfy these properties. Example:
+- Given a query contains properties: product-type, and product-properties-value list, find all items satisfy these properties. Example:
   - Find all items has product-type is: mobile-phone and product-properties is: Sim-type: DUAL-SIM, RAM-CAPACITY: 4GB
   - Find all items has product-type is: mobile-phone and product-properties is: OS: Android 7.0, screen-resolution: 4K
 
@@ -220,6 +220,23 @@ Example:
 ## Paging and sorting
 
 - Use paging and sorting when process object list API for performance reason.
+
+
+## Parameter filtering
+
+- Input param to API must be filtered in controller before entering service layer
+
+
+## Planning
+
+### Milestone 1: Implements customer service and order service
+
+- Implement code for each service.
+- Create database for each service
+- Create database script for each service
+- Test each service working status
+- Write unit test for each service 
+- Write database test for each service
 
 ## Benchmark performance
 
