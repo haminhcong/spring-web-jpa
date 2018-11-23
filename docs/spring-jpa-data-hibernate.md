@@ -16,6 +16,7 @@
 - https://stackoverflow.com/questions/47065484/one-to-many-relationship-in-spring-data-jpa
 - https://www.objectdb.com/java/jpa/persistence/crud
 - https://stackoverflow.com/questions/11938253/whats-the-difference-between-joincolumn-and-mappedby-when-using-a-jpa-onetoma
+- https://www.youtube.com/watch?v=wn1KYxxm0wo
 
 ## Sample projects
 
