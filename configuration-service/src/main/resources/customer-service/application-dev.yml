@@ -1,5 +1,5 @@
 server:
-  port: 8071
+  port: 0
 
 eureka:
   client:
@@ -13,9 +13,9 @@ eureka:
 # ===============================
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/db_service
-    username: db_service
-    password: db_service
+    url: jdbc:mysql://127.0.0.1:3401/customer_service
+    username: customer_service
+    password: customer_service
 
   # ===============================
   # = JPA configurations
