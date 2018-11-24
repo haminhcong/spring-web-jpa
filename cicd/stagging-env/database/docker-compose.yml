@@ -1,16 +1,31 @@
 version: '2.3'
 
 services:
-  mariadb:
-    container_name: mariadb
+
+  customer_database:
+    container_name: customer_database
     image: mariadb:10.3.8
     environment:
-      MYSQL_ROOT_PASSWORD: db_service
-      MYSQL_DATABASE: db_service
-      MYSQL_USER: db_service
-      MYSQL_PASSWORD: db_service
+      MYSQL_ROOT_PASSWORD: customer_database
+      MYSQL_DATABASE: customer_database
+      MYSQL_USER: customer_database
+      MYSQL_PASSWORD: customer_database
     volumes:
-    - ${PWD}/mariadb:/var/lib/mysql
+      - ${PWD}/customer_database:/var/lib/mysql
     ports:
-      - 3306:3306
+      - 3301:3306
+    restart: always
+
+  order_database:
+    container_name: order_database
+    image: mariadb:10.3.8
+    environment:
+      MYSQL_ROOT_PASSWORD: order_database
+      MYSQL_DATABASE: order_database
+      MYSQL_USER: order_database
+      MYSQL_PASSWORD: order_database
+    volumes:
+      - ${PWD}/order_database:/var/lib/mysql
+    ports:
+      - 3302:3306
     restart: always

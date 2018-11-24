@@ -22,10 +22,10 @@ import org.springframework.context.annotation.Import;
 
 
 /**
- * JavaConfig class to activate component scanning to pick up
- * {@link com.spring.service.repository.core.JpaCustomerRepository}. Re-uses the common infrastructure configuration
- * defined in {@link InfrastructureConfig}.
- * 
+ * JavaConfig class to activate component scanning to pick up {@link
+ * com.spring.service.repository.core.JpaCustomerRepository}. Re-uses the common infrastructure
+ * configuration defined in {@link InfrastructureConfig}.
+ *
  * @author Oliver Gierke
  */
 @Configuration

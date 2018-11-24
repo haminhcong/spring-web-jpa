@@ -35,6 +35,6 @@ public class OrderStatus {
       orphanRemoval = true,
       mappedBy = "orderStatus"
   )
-  private List<Order> orderList= new ArrayList<>();
+  private List<Order> orderList = new ArrayList<>();
 
 }

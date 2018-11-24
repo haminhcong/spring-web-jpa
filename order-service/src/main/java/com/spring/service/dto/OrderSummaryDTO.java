@@ -1,6 +1,5 @@
 package com.spring.service.dto;
 
-import com.spring.service.entity.OrderStatus;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;

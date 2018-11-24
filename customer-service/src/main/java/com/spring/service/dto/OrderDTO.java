@@ -8,10 +8,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDTO {
-    private String orderCode;
-    private String orderDate;
-    private String emailAddress;
-    private String deliveryAddress;
-    private String orderStatus;
-    private Long totalCost;
+
+  private String orderCode;
+  private String orderDate;
+  private String emailAddress;
+  private String deliveryAddress;
+  private String orderStatus;
+  private Long totalCost;
 }

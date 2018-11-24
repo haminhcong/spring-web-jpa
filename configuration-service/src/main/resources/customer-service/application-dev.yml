@@ -13,7 +13,7 @@ eureka:
 # ===============================
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3401/customer_service
+    url: jdbc:mysql://127.0.0.1:9001/customer_service
     username: customer_service
     password: customer_service
 
