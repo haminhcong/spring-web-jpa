@@ -29,19 +29,22 @@ Spring Boot uses a very particular PropertySource order that is designed to allo
 
 ```
 
-### Disable discovery service:
+### Disable cloud config and discovery service when test/init database:
+  - https://github.com/spring-cloud/spring-cloud-commons/issues/217#issuecomment-434769757
   - https://stackoverflow.com/questions/35142105/eureka-discovery-client-selective-disable
 
  ```yaml
-  spring:
-    profiles: development
-
-  eureka:
-    instance:
-      hostname: localhost
-    client:
-      registerWithEureka: false
-      fetchRegistry: false
+spring:
+  application:
+    name: app
+  cloud:
+    config:
+      enabled: false
+      discovery:
+        enabled: false
+eureka:
+  client:
+    enabled: false
 ```
 
 ### Spring boot default config value: AutoConfig

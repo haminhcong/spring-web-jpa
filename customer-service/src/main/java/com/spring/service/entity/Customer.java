@@ -22,7 +22,7 @@ public class Customer {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @Column(name = "account_name",unique = true,nullable = false)
+  @Column(name = "account_name", unique = true, nullable = false)
   private String accountName;
 
   @Column(name = "user_name")
@@ -40,4 +40,13 @@ public class Customer {
   @Column(name = "phone_number")
   private String phoneNumber;
 
+  public Customer(String accountName, String userName, String password, String gender,
+      String address, String phoneNumber){
+    this.accountName = accountName;
+    this.userName = userName;
+    this.password =  password;
+    this.gender =  gender;
+    this.address =  address;
+    this.phoneNumber = phoneNumber;
+  }
 }

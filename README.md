@@ -33,7 +33,7 @@
 - Clear old data in `cicd/stagging-env/*_database` folders
 - Create database folder for each service
 - Run `docker-compose up -d` to start databases for services, each service has it own database.
-- Go to each service, run init program in each service to populate init database for each service
+- Go to each service, run init program in each service to populate init database for each service with spring boot profile: `init-db`
 - Run each service in project
 
 ## Benchmark performance

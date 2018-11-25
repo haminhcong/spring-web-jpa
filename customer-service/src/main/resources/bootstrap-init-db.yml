@@ -1,0 +1,28 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+      discovery:
+        enabled: false
+  # ===============================
+  # = Hibernate datasource
+  # ===============================
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3301/customer_database
+    username: customer_database
+    password: customer_database
+
+  # ===============================
+  # = JPA configurations
+  # ===============================
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: MYSQL
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+eureka:
+  client:
+    enabled: false

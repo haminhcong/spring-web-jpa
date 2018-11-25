@@ -27,7 +27,7 @@ public class CustomerController {
   }
 
   // TODO: Replace this API with session style
-  @GetMapping(value = "/customers")
+  @GetMapping(value = "/customers", params = "id")
   public CustomerDTO getCustomer(@RequestParam("id") Long id) {
     Customer customer = customerService.getCustomer(id);
     if (customer == null) {

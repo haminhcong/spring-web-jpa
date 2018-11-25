@@ -218,3 +218,7 @@ Example:
 
 - Input param to API must be filtered in controller before entering service layer
 
+## Auto scaling
+
+- Auto scaling each service by average request per second metric
+- Use metric by integrate prometheus to spring boot actuator
