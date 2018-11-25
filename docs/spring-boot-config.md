@@ -47,6 +47,16 @@ eureka:
     enabled: false
 ```
 
+### Disable web server when use application to test/init database
+
+- https://stackoverflow.com/questions/29800584/how-to-prevent-spring-boot-autoconfiguration-for-spring-web
+
+```yaml
+spring:
+  main:
+    web-application-type: none
+```
+
 ### Spring boot default config value: AutoConfig
 
 - https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
