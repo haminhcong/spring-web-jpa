@@ -1,7 +1,7 @@
 package com.spring.service.service;
 
 import com.spring.service.dto.CustomerDTO;
-import com.spring.service.dto.OrderDTO;
+import com.spring.service.dto.TotalOrdersDTO;
 import com.spring.service.entity.Customer;
 import com.spring.service.http_client.OrderClient;
 import com.spring.service.repository.CustomerRepository;
@@ -32,18 +32,19 @@ public class CustomerService {
   }
 
   public CustomerDTO getCustomerDetail(Customer customer) {
-    List<OrderDTO> customerOrderList = orderClient.getCustomerOrders(customer.getId());
-    return getCustomerDetail(customer, customerOrderList);
+    TotalOrdersDTO totalCustomerOrders = orderClient
+        .getCustomerOrders(customer.getId());
+    return getCustomerDetail(customer, totalCustomerOrders.getTotalOrders());
   }
 
 
-  private CustomerDTO getCustomerDetail(Customer customer, List<OrderDTO> orderDTOList) {
+  private CustomerDTO getCustomerDetail(Customer customer, int totalOrders) {
     CustomerDTO customerDetail = new CustomerDTO();
     customerDetail.setUserName(customer.getUserName());
     customerDetail.setAddress(customer.getAddress());
     customerDetail.setGender(customer.getGender());
     customerDetail.setPhoneNumber(customer.getPhoneNumber());
-    customerDetail.setOrders(orderDTOList);
+    customerDetail.setTotalOrders(totalOrders);
     return customerDetail;
   }
 }

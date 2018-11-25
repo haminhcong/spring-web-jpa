@@ -2,6 +2,7 @@ package com.spring.service.service;
 
 import com.spring.service.dto.OrderSummaryDTO;
 import com.spring.service.dto.OrderSummaryListDTO;
+import com.spring.service.dto.TotalOrdersDTO;
 import com.spring.service.entity.Order;
 import com.spring.service.entity.OrderStatus;
 import com.spring.service.repository.OrderRepository;
@@ -32,8 +33,9 @@ public class OrderDAO {
   }
 
 
-  public int getCustomerTotalOrder(long customerID) {
-    return orderRepository.countTotalCustomerOrders(customerID);
+  public TotalOrdersDTO getCustomerTotalOrder(long customerID) {
+    int totalCustomerOrders =  orderRepository.countTotalCustomerOrders(customerID);
+    return  new TotalOrdersDTO(totalCustomerOrders);
   }
 
   public List<String> getOrderStatusCodeList() {

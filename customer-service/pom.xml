@@ -111,7 +111,7 @@
               <goal>repackage</goal>
             </goals>
             <configuration>
-              <mainClass>com.spring.service.DatabaseServiceApplication</mainClass>
+              <mainClass>com.spring.service.CustomerServiceApplication</mainClass>
             </configuration>
           </execution>
         </executions>

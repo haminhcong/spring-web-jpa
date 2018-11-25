@@ -1,6 +1,7 @@
 package com.spring.service.controller;
 
 import com.spring.service.dto.OrderSummaryListDTO;
+import com.spring.service.dto.TotalOrdersDTO;
 import com.spring.service.service.OrderDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class OrderController {
   }
 
   @GetMapping(value = "/customer-total-orders")
-  public int getCustomerTotalOrder(@RequestParam("customerID") Long customerID) {
+  public TotalOrdersDTO getCustomerTotalOrder(@RequestParam("customerID") Long customerID) {
     return orderDAO.getCustomerTotalOrder(customerID);
   }
 
