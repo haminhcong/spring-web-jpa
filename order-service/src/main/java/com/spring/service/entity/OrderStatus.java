@@ -9,19 +9,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "order_status")
 @AllArgsConstructor
+@NoArgsConstructor
 public class OrderStatus {
 
   @Id
   @Column(name = "id")
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @SequenceGenerator(name="order_status_seq", sequenceName = "order_status_seq",allocationSize=100)
+  @GeneratedValue(generator="order_status_seq")
   private Long id;
 
   @Column(name = "order_status_code", unique = true)
@@ -37,4 +41,8 @@ public class OrderStatus {
   )
   private List<Order> orderList = new ArrayList<>();
 
+  public OrderStatus(String orderStatusCode, String description){
+    this.orderStatusCode =  orderStatusCode;
+    this.description = description;
+  }
 }

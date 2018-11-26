@@ -1,3 +1,6 @@
+server:
+  port: 8072
+
 spring:
   cloud:
     config:

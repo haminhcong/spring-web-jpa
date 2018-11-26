@@ -1,34 +1,7 @@
 server:
-  port: 0
+  port: 8071
 
 spring:
   cloud:
     config:
       uri: http://localhost:8088
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8061/eureka/
-    registerWithEureka: true
-    fetchRegistry: true
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
-hystrix:
-  command:
-    findCustomerByAddress:
-      execution:
-        isolation:
-          strategy: THREAD
-          thread:
-            timeoutInMilliseconds: 8000
-  threadpool:
-    findCustomerByAddressPool:
-      coreSize: 20
-      allowMaximumSizeToDivergeFromCoreSize: true
-      maximumSize: 100

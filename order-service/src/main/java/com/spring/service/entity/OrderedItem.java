@@ -4,10 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +22,8 @@ public class OrderedItem {
 
   @Id
   @Column(name = "id")
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @SequenceGenerator(name="ordered_item_seq", sequenceName = "ordered_item_seq",allocationSize=100)
+  @GeneratedValue(generator="ordered_item_seq")
   private Long id;
 
   @Column(name = "item_id")
@@ -37,5 +38,11 @@ public class OrderedItem {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "order_id")
   private Order order;
+
+  public OrderedItem(Long itemID, Long quantity, Double price) {
+    this.itemID = itemID;
+    this.quantity = quantity;
+    this.price = price;
+  }
 
 }
