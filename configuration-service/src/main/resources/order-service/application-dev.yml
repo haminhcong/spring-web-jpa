@@ -5,6 +5,26 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
 
+spring:
+  # ===============================
+  # = Hibernate datasource
+  # ===============================
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3302/order_database
+    username: order_database
+    password: order_database
+
+  # ===============================
+  # = JPA configurations
+  # ===============================
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: MYSQL
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
 management:
   endpoints:
     web:
@@ -24,23 +44,3 @@ hystrix:
       coreSize: 20
       allowMaximumSizeToDivergeFromCoreSize: true
       maximumSize: 100
-
-spring:
-# ===============================
-# = Hibernate datasource
-# ===============================
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3302/order_database
-    username: order_database
-    password: order_database
-
-  # ===============================
-  # = JPA configurations
-  # ===============================
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    database-platform: MYSQL
-    properties:
-      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect

@@ -3,8 +3,8 @@ package com.spring.service.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +19,8 @@ public class Customer {
 
   @Id
   @Column(name = "id")
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @SequenceGenerator(name="customer_seq", sequenceName = "customer_seq",allocationSize=100)
+  @GeneratedValue(generator="customer_seq")
   private Long id;
 
   @Column(name = "account_name", unique = true, nullable = false)

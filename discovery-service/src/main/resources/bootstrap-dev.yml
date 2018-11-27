@@ -1,0 +1,7 @@
+server:
+  port: 8061
+
+spring:
+  cloud:
+    config:
+      uri: http://localhost:8088
