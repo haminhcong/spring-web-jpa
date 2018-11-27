@@ -29,8 +29,8 @@ public class OrderController {
   @GetMapping(value = "/orders")
   public OrderSummaryListDTO getAllOrders(
       @RequestParam(value = "statusCode", required = false, defaultValue = "") String status_code,
-      @RequestParam(value = "pageIndex") int pageIndex,
-      @RequestParam(value = "pageSize") int pageSize,
+      @RequestParam(value = "pageIndex", required = false, defaultValue = "0") int pageIndex,
+      @RequestParam(value = "pageSize",required = false,defaultValue = "10") int pageSize,
       @RequestParam(value = "sortKey", required = false, defaultValue = "id") String sortKey,
       @RequestParam(value = "sortDirection", required = false, defaultValue = "asc") String sortDirection
   ) {

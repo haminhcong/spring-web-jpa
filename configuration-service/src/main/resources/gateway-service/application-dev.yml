@@ -29,9 +29,11 @@ zuul:
     account:
       path: /customer/**
       serviceId: customer-service
+      strip-prefix: true
     order:
       path: /order/**
       serviceId: order-service
+      strip-prefix: true
   #  ribbon-isolation-strategy: semaphore
   ribbon-isolation-strategy: THREAD
   threadPool:
