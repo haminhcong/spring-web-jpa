@@ -1,4 +1,4 @@
-package com.spring.service.controller;
+package com.spring.service.controller.v1;
 
 import com.spring.service.dto.OrderSummaryListDTO;
 import com.spring.service.dto.TotalOrdersDTO;
@@ -6,10 +6,12 @@ import com.spring.service.service.OrderDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/v1")
 public class OrderController {
 
   private OrderDAO orderDAO;

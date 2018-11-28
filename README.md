@@ -36,6 +36,30 @@
 - Go to each service, run init program in each service to populate init database for each service with spring boot profile: `init-db`
 - Run each service in project
 
+## How to test this project 
+
+```text
+
+GET http://localhost:8060/api/customer-api/v1/customers
+
+###
+GET http://localhost:8060/api/customer-api/v1/customers?id=1
+
+###
+GET http://localhost:8060/api/order-api/v1/orders?customerID=2
+
+###
+GET http://localhost:8060/api/order-api/v1/order-status-code-list
+
+###
+GET http://localhost:8060/api/order-api/v1/customer-total-orders?customerID=1
+
+###
+GET http://localhost:8060/api/order-api/v1/customer-total-orders?customerID=2
+
+```
+
+
 ## Benchmark performance
 
 ```bash

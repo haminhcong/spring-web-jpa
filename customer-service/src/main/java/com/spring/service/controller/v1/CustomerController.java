@@ -1,4 +1,4 @@
-package com.spring.service.controller;
+package com.spring.service.controller.v1;
 
 import com.spring.service.dto.CustomerDTO;
 import com.spring.service.entity.Customer;
@@ -7,11 +7,12 @@ import com.spring.service.service.CustomerService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-//@RequestMapping("/api")
+@RequestMapping("/v1")
 public class CustomerController {
 
   private CustomerService customerService;

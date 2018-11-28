@@ -24,20 +24,21 @@ management:
 zuul:
   semaphore:
     max-semaphores: 350
-  prefix: /api
-  routes:
-    account:
-      path: /customer/**
-      serviceId: customer-service
-      strip-prefix: true
-    order:
-      path: /order/**
-      serviceId: order-service
-      strip-prefix: true
   #  ribbon-isolation-strategy: semaphore
   ribbon-isolation-strategy: THREAD
   threadPool:
     useSeparateThreadPools: true
+
+  prefix: /api
+  routes:
+    account:
+      path: /customer-api/**
+      serviceId: customer-service
+#      strip-prefix: false
+    order:
+      path: /order-api/**
+      serviceId: order-service
+
 
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
 

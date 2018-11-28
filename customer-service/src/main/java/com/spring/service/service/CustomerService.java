@@ -3,7 +3,7 @@ package com.spring.service.service;
 import com.spring.service.dto.CustomerDTO;
 import com.spring.service.dto.TotalOrdersDTO;
 import com.spring.service.entity.Customer;
-import com.spring.service.http_client.OrderClient;
+import com.spring.service.http_client.OrderV1Client;
 import com.spring.service.repository.CustomerRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +13,14 @@ import org.springframework.stereotype.Service;
 public class CustomerService {
 
   private CustomerRepository customerRepository;
-  private OrderClient orderClient;
+  private OrderV1Client orderV1Client;
 
   @Autowired
   public CustomerService(
       CustomerRepository customerRepository,
-      OrderClient orderClient) {
+      OrderV1Client orderV1Client) {
     this.customerRepository = customerRepository;
-    this.orderClient = orderClient;
+    this.orderV1Client = orderV1Client;
   }
 
   public List<Customer> getCustomerList() {
@@ -32,7 +32,7 @@ public class CustomerService {
   }
 
   public CustomerDTO getCustomerDetail(Customer customer) {
-    TotalOrdersDTO totalCustomerOrders = orderClient
+    TotalOrdersDTO totalCustomerOrders = orderV1Client
         .getCustomerOrders(customer.getId());
     return getCustomerDetail(customer, totalCustomerOrders.getTotalOrders());
   }
