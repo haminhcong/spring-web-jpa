@@ -107,10 +107,10 @@ public class MyEntity2 {
 }
 ```
   
-## Spring data query via entity manager and via JPA repository, result in entity List and result in DTO List
+### Spring data query via entity manager and via JPA repository, result in entity List and result in DTO List
 
 
-### Via Repository
+#### Via Repository
 
 - JPA and JPQL Query and entity result
 
@@ -266,6 +266,277 @@ public interface UserRepository extends JpaRepository<User, Long> {
 }
 
 ```
+
+### Spring transactional concurrency problem
+
+#### Spring data lock
+
+Ref:
+
+- https://vladmihalcea.com/how-does-database-pessimistic-locking-interact-with-insert-update-and-delete-sql-statements/
+- http://lostincoding.blogspot.com/2015/11/differences-in-jpa-entity-locking-modes.html
+- https://www.objectdb.com/java/jpa/persistence/lock
+- https://mobiarch.wordpress.com/2013/08/01/doing-select-for-update-in-jpa/
+- https://www.byteslounge.com/tutorials/locking-in-jpa-lockmodetype
+- https://vladmihalcea.com/a-beginners-guide-to-java-persistence-locking/
+
+```java
+EntityManager em;
+//Step 1: SELECT FOR UPDATE
+AccountBalance ab = em.find(AccountBalance.class, accountId,
+    LockModeType.PESSIMISTIC_WRITE);
+//Step 2: Validation check
+if (ab.getBalance() - withdrawAmount < 0.00) {
+   //Error handling. Abort transaction
+   //...
+
+   throw ...; //Get out of here
+} 
+//Step 3: Proceed with operation
+ab.setBalance(ab.getBalance() - withdrawAmount);
+```
+
+- Or use with query:
+
+
+```java
+TypedQuery<Cart> q = em.createQuery("select c from Cart c where ...", Cart.class);
+q.setLockMode(LockModeType.PESSIMISTIC_WRITE);
+```
+
+- Or use with JPA repository:
+
+
+```java
+interface WidgetRepository extends Repository<Widget, Long> {
+
+  @Lock(LockModeType.PESSIMISTIC_WRITE)
+  Widget findOne(Long id);
+}
+```
+
+```java
+/**
+ * Repository for Wallet.
+ */
+public interface WalletRepository extends CrudRepository<Wallet, Long>, JpaSpecificationExecutor<Wallet> {
+
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query("select w from Wallet w where w.id = :id")
+    Wallet findOneForUpdate(@Param("id") Long id);
+}
+```
+
+Use lock example:
+
+```java
+try {
+   entityManager.getTransaction().begin();
+   r = entityManager.find(Route.class, r.getPrimaryKey(), LockModeType.PESSIMISTIC_WRITE);
+   r.setRoute(txtRoute.getText());
+   entityManager.getTransaction().commit();
+} catch (PessimisticLockException e) {
+   // log & rethrow
+}
+```
+
+
+```java
+Query query = entityManager.createQuery("from Student where id = :id");
+query.setParameter("id", studentId);
+query.setLockMode(LockModeType.OPTIMISTIC_INCREMENT);
+query.getResultList()
+```
+
+Sping locking mechanisms may be classified in two major groups: Optimistic lock and pessimistic lock.
+
+
+- Pessimistic locking results in database records being locked by some process until 
+the unit of work is completed so no other process is able to interfere with the locked records 
+until the work is not finished. 
+
+- Optimistic locking does not actually lock anything but relies instead in checks 
+made against the database during data persistence events or 
+transaction commit in order to detect if the data has been changed in the meanwhile by some other process.
+
+##### JPA locking
+
+- As a database abstraction layer, JPA can benefit from the implicit locking mechanisms offered by the underlying RDBMS. 
+For logical locking, JPA offers an optional automated entity version control mechanism as well.
+
+- JPA supports explicit locking for the following operations: 
+  - finding an entity
+  - locking an existing persistence context entity
+  - refreshing an entity
+  - querying through JPQL, Criteria or native queries
+
+##### Explicit lock types
+
+The LockModeType contains the following optimistic and pessimistic locking modes:
+
+- NONE: In the absence of explicit locking, the application will use implicit locking (optimistic or pessimistic)
+- OPTIMISTIC: 	Always issues a version check upon transaction commit, therefore ensuring optimistic locking repeatable reads.
+- READ: 	Same as OPTIMISTIC.
+- OPTIMISTIC_FORCE_INCREMENT: 	Always increases the entity version (even when the entity doesn’t change) and issues a version check upon transaction commit, therefore ensuring optimistic locking repeatable reads.
+- WRITE: 	Same as OPTIMISTIC_FORCE_INCREMENT.
+- PESSIMISTIC_READ: 	A shared lock is acquired to prevent any other transaction from acquiring a PESSIMISTIC_WRITE lock.
+- PESSIMISTIC_WRITE: 	An exclusive lock is acquired to prevent any other transaction from acquiring a PESSIMISTIC_READ or a PESSIMISTIC_WRITE lock.
+- PESSIMISTIC_FORCE_INCREMENT: 	A database lock is acquired to prevent any other transaction from acquiring a PESSIMISTIC_READ or a PESSIMISTIC_WRITE lock and the entity version is incremented upon transaction commit.
+
+##### Spring data support for database isolation level
+
+References: https://vladmihalcea.com/a-beginners-guide-to-transaction-isolation-levels-in-enterprise-java/
+
+In a relational database system, atomicity and durability are strict properties, 
+while consistency and isolation are more or less configurable. 
+We cannot even separate consistency from isolation as these two properties are always related.
+
+The lower the isolation level, the less consistent the system will get. 
+From the least to the most consistent, there are four isolation levels:
+
+- READ UNCOMMITTED
+- READ COMMITTED (protecting against dirty reads)
+- REPEATABLE READ (protecting against dirty and non-repeatable reads)
+- SERIALIZABLE (protecting against dirty, non-repeatable reads and phantom reads)
+
+Although the most consistent SERIALIZABLE isolation level would be the safest choice, 
+most databases default to READ COMMITTED instead. 
+According to Amdahl’s law, to accommodate more concurrent transactions, we have to reduce the serial fraction of our data processing. 
+The shorter the lock acquisition interval, the more requests a database can process. 
+
+
+Spring
+
+Spring @Transactional annotation is used for defining a transaction boundary. As opposed to Java EE, this annotation allows us to configure:
+
+- isolation level
+- exception types rollback policy
+- propagation
+- read-only
+- timeout
+
+
+Example:
+
+```java
+@Service
+public class StoreServiceImpl implements StoreService {
+ 
+    protected final Logger LOGGER = LoggerFactory.getLogger(getClass());
+ 
+    @PersistenceContext(unitName = "persistenceUnit")
+    private EntityManager entityManager;
+ 
+    @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public void purchase(Long productId) {        
+        Session session = (Session) entityManager.getDelegate();
+        session.doWork(new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                LOGGER.debug("Transaction isolation level is {}", Environment.isolationLevelToString(connection.getTransactionIsolation()));
+            }
+        });
+    }
+}
+```
+
+Note: we have some problem when use JTA instead JPA in spring transaction:
+
+```xml
+<bean id="jtaTransactionManager" factory-method="getTransactionManager"
+      class="bitronix.tm.TransactionManagerServices" depends-on="btmConfig, dataSource"
+      destroy-method="shutdown"/>
+ 
+<bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
+    <property name="transactionManager" ref="jtaTransactionManager"/>
+    <property name="userTransaction" ref="jtaTransactionManager"/>
+</bean>
+```
+
+we will have an exception when run above code:
+
+```log
+org.springframework.transaction.InvalidIsolationLevelException: 
+JtaTransactionManager does not support custom isolation levels by default - 
+switch 'allowCustomIsolationLevels' to 'true'
+```
+
+at this case, we need enable custom transaction manager:
+
+
+```xml
+<bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
+    <property name="transactionManager" ref="jtaTransactionManager"/>
+    <property name="userTransaction" ref="jtaTransactionManager"/>
+    <property name="allowCustomIsolationLevels" value="true"/>
+</bean>
+```
+
+Ref: https://vladmihalcea.com/a-beginners-guide-to-transaction-isolation-levels-in-enterprise-java/
+
+### Use JPA database lock with isolation level
+
+- Ref: https://stackoverflow.com/a/30796328
+
+Both transaction isolation and JPA Entity locking are concurrency control mechanisms.
+
+The [transaction isolation][1] is applied on a JDBC Connection level and the scope is the transaction life-cycle itself (you can't change the transaction isolation from your current running transactions). Modern databases allow you to use both [2PL (two-phase locking)][2] isolation levels and [MVCC](https://vladmihalcea.com/how-does-mvcc-multi-version-concurrency-control-work/) ones (SNAPSHOT_ISOLATION or PostgreSQL isolation levels). In MVCC, readers do not block writers and writers do not block readers (only writers block writers).
+
+The [Java Persistence Locking API][3] offers both database-level and application-level concurrency control, which can be split in two categories:
+
+1. Explicit Optimistic lock modes:
+
+ - [OPTIMISTIC][4]
+ - [OPTIMISTIC_FORCE_INCREMENT][5]
+ - [PESSIMISTIC_FORCE_INCREMENT][6]
+
+The optimistic locking uses version checks in UPDATE/DELETE statements and fail on version mismatches.
+
+2. Explicit pessimistic lock modes:
+
+ - [PESSIMISTIC_READ][7]
+ - [PESSIMISTIC_WRITE][7]
+
+The pessimistic lock modes use a database-specific lock syntax to acquire read (shared) or write (exclusive) locks (eg. SELECT ... FOR UPDATE). 
+
+An [explicit lock mode][8] is suitable when you run on a lower-consistency isolation level (READ_COMMITTED) and you want to acquire locks whose scope are [upgraded from query life-time to a transaction life-time][9].
+
+  [1]: http://vladmihalcea.com/a-beginners-guide-to-transaction-isolation-levels-in-enterprise-java/
+  [2]: https://vladmihalcea.com/a-beginners-guide-to-the-phantom-read-anomaly-and-how-it-differs-between-2pl-and-mvcc/
+  [3]: http://vladmihalcea.com/a-beginners-guide-to-java-persistence-locking/
+  [4]: http://vladmihalcea.com/hibernate-locking-patterns-how-does-optimistic-lock-mode-work/
+  [5]: http://vladmihalcea.com/hibernate-locking-patterns-how-does-optimistic_force_increment-lock-mode-work/
+  [6]: http://vladmihalcea.com/hibernate-locking-patterns-how-does-pessimistic_force_increment-lock-mode-work/
+  [7]: http://vladmihalcea.com/hibernate-locking-patterns-how-do-pessimistic_read-and-pessimistic_write-work/
+  [8]: https://vladmihalcea.com/how-does-database-pessimistic-locking-interact-with-insert-update-and-delete-sql-statements/
+  [9]: http://vladmihalcea.com/a-beginners-guide-to-acid-and-database-transactions/
+
+
+### Spring Jpa Implement Opstimistic locking
+
+
+### Spring read-only transaction Hibernate optimization
+
+- Ref: 
+
+### spring transaction propagation
+
+Ref
+
+- https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/Propagation.html
+- https://www.byteslounge.com/tutorials/spring-transaction-propagation-tutorial
+
+
+Mode:
+
+- MANDATORY Support a current transaction, throw an exception if none exists.
+- NESTED Execute within a nested transaction if a current transaction exists, behave like PROPAGATION_REQUIRED else.
+- NEVER Execute non-transactionally, throw an exception if a transaction exists.
+- NOT_SUPPORTED Execute non-transactionally, suspend the current transaction if one exists.
+- REQUIRED Support a current transaction, create a new one if none exists.
+- REQUIRES_NEW Create a new transaction, and suspend the current transaction if one exists.
+- SUPPORTS Support a current transaction, execute non-transactionally if none exists.
 
 ## Book
 

@@ -11,10 +11,10 @@ zuul:
   routes:
     account:
       path: /customer-api/**
-      serviceId: customer-service
+      serviceId: ws
     order:
       path: /order-api/**
-      serviceId: order-service
+      serviceId: ws
       strip-prefix: true
 ```
 
@@ -29,11 +29,11 @@ zuul:
   routes:
     account:
       path: /customer-api/**
-      serviceId: customer-service
+      serviceId: ws
       strip-prefix: false
     order:
       path: /order-api/**
-      serviceId: order-service
+      serviceId: ws
       strip-prefix: false
 ```
 

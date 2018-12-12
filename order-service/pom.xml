@@ -103,7 +103,7 @@
               <goal>repackage</goal>
             </goals>
             <configuration>
-              <mainClass>com.spring.service.OrderServiceApplication</mainClass>
+              <mainClass>com.spring.ws.OrderServiceApplication</mainClass>
             </configuration>
           </execution>
         </executions>

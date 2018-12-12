@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.spring.service.repository.order;
+package com.spring.ws.repository.order;
 
-import com.spring.service.repository.core.AbstractEntity;
-import com.spring.service.repository.core.Product;
+import com.spring.ws.repository.core.AbstractEntity;
+import com.spring.ws.repository.core.Product;
 import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;

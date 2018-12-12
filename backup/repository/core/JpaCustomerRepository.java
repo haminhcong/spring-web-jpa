@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.spring.service.repository.core;
+package com.spring.ws.repository.core;
 
-import com.spring.service.repository.core.Customer;
+import com.spring.ws.repository.core.Customer;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;

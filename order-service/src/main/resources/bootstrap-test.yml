@@ -1,7 +1,0 @@
-#Disable cloud config and config discovery
-spring:
-  cloud:
-    config:
-      enabled: false
-      discovery:
-        enabled: false
