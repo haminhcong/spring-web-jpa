@@ -7,6 +7,43 @@
 
 ## Problems:
 
+### Spring boot set default transaction timeout:
+
+Refs: 
+
+- <https://stackoverflow.com/questions/40629193/spring-boot-transaction-manager-timeout>
+- <https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html>
+
+```ini
+# TRANSACTION (TransactionProperties)
+spring.transaction.default-timeout= # Default transaction timeout. If a duration suffix is not specified, seconds will be used.
+spring.transaction.rollback-on-commit-failure= # Whether to roll back on commit failures.
+```
+
+
+```yaml
+spring:
+  transaction:
+    default-timeout: 20
+```
+### Spring boot hikari pool config:
+
+Refs:
+
+- <https://gist.github.com/rhamedy/b3cb936061cc03acdfe21358b86a5bc6#file-application-properties>
+
+```yaml
+
+spring:
+  datasource:
+    hikari:
+      minimumIdle: 5
+      maximumPoolSize: 20
+      idleTimeout: 10000
+      maxLifetime: 2000000
+      connectionTimeout: 10000
+```
+
 ### Use paging and sorting in spring data jpa: 
 
   - https://www.logicbig.com/tutorials/spring-framework/spring-data/pagination.html

@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface OrderV1Client {
 
   @RequestMapping(value = "/v1/customer-total-orders", method = RequestMethod.GET)
-  TotalOrdersDTO getCustomerOrders(@RequestParam("customerID") Long customerID);
+  TotalOrdersDTO getCustomerOrders(@RequestParam("customerID") Long customerID) throws Exception;
 }

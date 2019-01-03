@@ -8,6 +8,7 @@ import com.spring.ws.repository.CustomerRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CustomerService {
@@ -23,20 +24,23 @@ public class CustomerService {
     this.orderV1Client = orderV1Client;
   }
 
-  public List<Customer> getCustomerList() {
+  @Transactional
+  public List<Customer> getCustomerList() throws Exception{
     return customerRepository.findAll();
   }
 
-  public Customer getCustomer(Long id) {
-    return customerRepository.findById(id).orElse(null);
-  }
-
-  public CustomerDTO getCustomerDetail(Customer customer) {
-    TotalOrdersDTO totalCustomerOrders = orderV1Client
-        .getCustomerOrders(customer.getId());
+  public CustomerDTO getCustomerDetail(Long  id) throws Exception {
+    Customer customer =  getCustomer(id);
+    if(customer ==null){
+      return null;
+    }
+    TotalOrdersDTO totalCustomerOrders = orderV1Client.getCustomerOrders(id);
     return getCustomerDetail(customer, totalCustomerOrders.getTotalOrders());
   }
 
+  private Customer getCustomer(Long id) {
+    return customerRepository.findById(id).orElse(null);
+  }
 
   private CustomerDTO getCustomerDetail(Customer customer, int totalOrders) {
     CustomerDTO customerDetail = new CustomerDTO();
