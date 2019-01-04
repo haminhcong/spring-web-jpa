@@ -1,2 +1,4 @@
 .idea
+*.iml
 target/
+cicd/stagging-env/database/*_database

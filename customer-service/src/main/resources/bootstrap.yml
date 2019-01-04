@@ -1,26 +1,3 @@
 spring:
   application:
     name: customer-service
-  cloud:
-    config:
-      uri: http://localhost:8088
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
-hystrix:
-  command:
-    findCustomerByAddress:
-      execution:
-        isolation:
-          strategy: THREAD
-          thread:
-            timeoutInMilliseconds: 8000
-  threadpool:
-    findCustomerByAddressPool:
-      coreSize: 20
-      allowMaximumSizeToDivergeFromCoreSize: true
-      maximumSize: 100

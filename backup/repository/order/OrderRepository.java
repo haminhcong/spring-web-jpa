@@ -13,25 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.spring.service.repository.order;
+package com.spring.ws.repository.order;
 
-import com.spring.service.repository.core.Customer;
-import org.springframework.data.repository.PagingAndSortingRepository;
-
+import com.spring.ws.repository.core.Customer;
 import java.util.List;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  * Repository to access {@link Order}s.
- * 
+ *
  * @author Oliver Gierke
  */
 public interface OrderRepository extends PagingAndSortingRepository<Order, Long> {
 
-	/**
-	 * Returns all {@link Order}s of the given {@link Customer}.
-	 * 
-	 * @param customer
-	 * @return
-	 */
-	List<Order> findByCustomer(Customer customer);
+  /**
+   * Returns all {@link Order}s of the given {@link Customer}.
+   */
+  List<Order> findByCustomer(Customer customer);
 }

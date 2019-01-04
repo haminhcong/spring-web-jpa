@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.spring.service.repository.core;
+package com.spring.ws.repository.core;
 
+import com.spring.ws.repository.core.Customer;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
-import com.spring.service.repository.core.Customer;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -30,42 +29,43 @@ import org.springframework.stereotype.Repository;
 @Repository
 class JpaCustomerRepository implements CustomerRepository {
 
-    @PersistenceContext
-    private EntityManager em;
+  @PersistenceContext
+  private EntityManager em;
 
-    /*
-     * (non-Javadoc)
-     * @see com.oreilly.springdata.jpa.core.CustomerRepository#findOne(java.lang.Long)
-     */
-    @Override
-    public Customer findOne(Long id) {
-        return em.find(Customer.class, id);
+  /*
+   * (non-Javadoc)
+   * @see com.oreilly.springdata.jpa.core.CustomerRepository#findOne(java.lang.Long)
+   */
+  @Override
+  public Customer findOne(Long id) {
+    return em.find(Customer.class, id);
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see com.oreilly.springdata.jpa.core.CustomerRepository#save(com.oreilly.springdata.jpa.core.Customer)
+   */
+  public Customer save(Customer customer) {
+    if (customer.getId() == null) {
+      em.persist(customer);
+      return customer;
+    } else {
+      return em.merge(customer);
     }
+  }
 
-    /*
-     * (non-Javadoc)
-     * @see com.oreilly.springdata.jpa.core.CustomerRepository#save(com.oreilly.springdata.jpa.core.Customer)
-     */
-    public Customer save(Customer customer) {
-        if (customer.getId() == null) {
-            em.persist(customer);
-            return customer;
-        } else {
-            return em.merge(customer);
-        }
-    }
+  /*
+   * (non-Javadoc)
+   * @see com.oreilly.springdata.jpa.core.CustomerRepository#findByEmailAddress(com.oreilly.springdata.jpa.core.EmailAddress)
+   */
+  @Override
+  public Customer findByEmailAddress(EmailAddress emailAddress) {
 
-    /*
-     * (non-Javadoc)
-     * @see com.oreilly.springdata.jpa.core.CustomerRepository#findByEmailAddress(com.oreilly.springdata.jpa.core.EmailAddress)
-     */
-    @Override
-    public Customer findByEmailAddress(EmailAddress emailAddress) {
+    TypedQuery<Customer> query = em
+        .createQuery("select c from Customer c where c.emailAddress = :email",
+            Customer.class);
+    query.setParameter("email", emailAddress);
 
-        TypedQuery<Customer> query = em.createQuery("select c from Customer c where c.emailAddress = :email",
-                Customer.class);
-        query.setParameter("email", emailAddress);
-
-        return query.getSingleResult();
-    }
+    return query.getSingleResult();
+  }
 }

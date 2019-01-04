@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.spring.service.AppConfig;
+package com.spring.ws.AppConfig;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
- * JavaConfig class to enable Spring Data JPA repositories. Re-using common infrastrcuture configuration from
- * {@link InfrastructureConfig}.
- * 
+ * JavaConfig class to enable Spring Data JPA repositories. Re-using common infrastrcuture
+ * configuration from {@link InfrastructureConfig}.
+ *
  * @author Oliver Gierke
  */
 @Configuration

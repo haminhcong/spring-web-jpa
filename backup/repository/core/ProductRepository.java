@@ -13,14 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.spring.service.repository.core;
-
-import java.util.List;
+package com.spring.ws.repository.core;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -30,20 +26,17 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface ProductRepository extends CrudRepository<Product, Long> {
 
-    
-    /**
-     * Returns a {@link Page} of {@link Product}s having a description which contains the given snippet.
-     *
-     * @param description
-     * @param pageable
-     * @return
-     */
-    Page<Product> findByDescriptionContaining(String description, Pageable pageable);
 
-    /**
-     * Returns all {@link Product}s having the given attribute.
-     *
-     * @param attribute
-     * @return
-     */
+  /**
+   * Returns a {@link Page} of {@link Product}s having a description which contains the given
+   * snippet.
+   */
+  Page<Product> findByDescriptionContaining(String description, Pageable pageable);
+
+  /**
+   * Returns all {@link Product}s having the given attribute.
+   *
+   * @param attribute
+   * @return
+   */
 }

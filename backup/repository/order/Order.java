@@ -13,137 +13,123 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.spring.service.repository.order;
+package com.spring.ws.repository.order;
 
+import com.spring.ws.repository.core.Address;
+import com.spring.ws.repository.core.Customer;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.spring.service.repository.core.Address;
-import com.spring.service.repository.core.Customer;
 import org.dom4j.tree.AbstractEntity;
 import org.springframework.util.Assert;
 
 
 /**
  * An order.
- * 
+ *
  * @author Oliver Gierke
  */
 @Entity
 @Table(name = "Orders")
 public class Order extends AbstractEntity {
 
-	@ManyToOne(optional = false)
-	private Customer customer;
+  @ManyToOne(optional = false)
+  private Customer customer;
 
-	@ManyToOne
-	private Address billingAddress;
+  @ManyToOne
+  private Address billingAddress;
 
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
-	private Address shippingAddress;
+  @ManyToOne(optional = false, cascade = CascadeType.ALL)
+  private Address shippingAddress;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "order_id")
-	private Set<LineItem> lineItems = new HashSet<LineItem>();
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "order_id")
+  private Set<LineItem> lineItems = new HashSet<LineItem>();
 
-	/**
-	 * Creates a new {@link Order} for the given {@link Customer}.
-	 * 
-	 * @param customer must not be {@literal null}.
-	 * @param shippingAddress must not be {@literal null}.
-	 */
-	public Order(Customer customer, Address shippingAddress) {
-		this(customer, shippingAddress, null);
-	}
+  /**
+   * Creates a new {@link Order} for the given {@link Customer}.
+   *
+   * @param customer must not be {@literal null}.
+   * @param shippingAddress must not be {@literal null}.
+   */
+  public Order(Customer customer, Address shippingAddress) {
+    this(customer, shippingAddress, null);
+  }
 
-	/**
-	 * Creates a new {@link Order} for the given customer, shipping and billing {@link Address}.
-	 * 
-	 * @param customer must not be {@literal null}.
-	 * @param shippingAddress must not be {@literal null}.
-	 * @param billingAddress can be {@@iteral null}.
-	 */
-	public Order(Customer customer, Address shippingAddress, Address billingAddress) {
+  /**
+   * Creates a new {@link Order} for the given customer, shipping and billing {@link Address}.
+   *
+   * @param customer must not be {@literal null}.
+   * @param shippingAddress must not be {@literal null}.
+   * @param billingAddress can be {@@iteral null}.
+   */
+  public Order(Customer customer, Address shippingAddress, Address billingAddress) {
 
-		Assert.notNull(customer);
-		Assert.notNull(shippingAddress);
+    Assert.notNull(customer);
+    Assert.notNull(shippingAddress);
 
-		this.customer = customer;
-		this.shippingAddress = shippingAddress.getCopy();
-		this.billingAddress = billingAddress == null ? null : billingAddress.getCopy();
-	}
+    this.customer = customer;
+    this.shippingAddress = shippingAddress.getCopy();
+    this.billingAddress = billingAddress == null ? null : billingAddress.getCopy();
+  }
 
-	protected Order() {
+  protected Order() {
 
-	}
+  }
 
-	/**
-	 * Adds the given {@link LineItem} to the {@link Order}.
-	 * 
-	 * @param lineItem
-	 */
-	public void add(LineItem lineItem) {
-		this.lineItems.add(lineItem);
-	}
+  /**
+   * Adds the given {@link LineItem} to the {@link Order}.
+   */
+  public void add(LineItem lineItem) {
+    this.lineItems.add(lineItem);
+  }
 
-	/**
-	 * Returns the {@link Customer} who placed the {@link Order}.
-	 * 
-	 * @return
-	 */
-	public Customer getCustomer() {
-		return customer;
-	}
+  /**
+   * Returns the {@link Customer} who placed the {@link Order}.
+   */
+  public Customer getCustomer() {
+    return customer;
+  }
 
-	/**
-	 * Returns the billing {@link Address} for this order.
-	 * 
-	 * @return
-	 */
-	public Address getBillingAddress() {
-		return billingAddress != null ? billingAddress : shippingAddress;
-	}
+  /**
+   * Returns the billing {@link Address} for this order.
+   */
+  public Address getBillingAddress() {
+    return billingAddress != null ? billingAddress : shippingAddress;
+  }
 
-	/**
-	 * Returns the shipping {@link Address} for this order;
-	 * 
-	 * @return
-	 */
-	public Address getShippingAddress() {
-		return shippingAddress;
-	}
+  /**
+   * Returns the shipping {@link Address} for this order;
+   */
+  public Address getShippingAddress() {
+    return shippingAddress;
+  }
 
-	/**
-	 * Returns all {@link LineItem}s currently belonging to the {@link Order}.
-	 * 
-	 * @return
-	 */
-	public Set<LineItem> getLineItems() {
-		return Collections.unmodifiableSet(lineItems);
-	}
+  /**
+   * Returns all {@link LineItem}s currently belonging to the {@link Order}.
+   */
+  public Set<LineItem> getLineItems() {
+    return Collections.unmodifiableSet(lineItems);
+  }
 
-	/**
-	 * Returns the total of the {@link Order}.
-	 * 
-	 * @return
-	 */
-	public BigDecimal getTotal() {
+  /**
+   * Returns the total of the {@link Order}.
+   */
+  public BigDecimal getTotal() {
 
-		BigDecimal total = BigDecimal.ZERO;
+    BigDecimal total = BigDecimal.ZERO;
 
-		for (LineItem item : lineItems) {
-			total = total.add(item.getTotal());
-		}
+    for (LineItem item : lineItems) {
+      total = total.add(item.getTotal());
+    }
 
-		return total;
-	}
+    return total;
+  }
 }
