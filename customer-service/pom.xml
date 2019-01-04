@@ -13,7 +13,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.1.1.RELEASE</version>
+    <version>2.0.5.RELEASE</version>
     <relativePath/>
   </parent>
 
@@ -67,7 +67,6 @@
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-commons</artifactId>
-      <version>2.0.8.RELEASE</version>
     </dependency>
 
     <dependency>
@@ -119,11 +118,11 @@
             <goals>
               <goal>repackage</goal>
             </goals>
-            <configuration>
-              <mainClass>com.spring.ws.CustomerServiceApplication</mainClass>
-            </configuration>
           </execution>
         </executions>
+        <configuration>
+          <mainClass>com.spring.ws.CustomerServiceApplication</mainClass>
+        </configuration>
       </plugin>
 
       <plugin>
@@ -134,6 +133,7 @@
           <excludedGroups>integration.IntegrationTest</excludedGroups>
         </configuration>
       </plugin>
+
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
         <version>2.18.1</version>
@@ -149,7 +149,6 @@
           <execution>
             <goals>
               <goal>integration-test</goal>
-              <goal>verify</goal>
             </goals>
           </execution>
         </executions>

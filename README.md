@@ -4,7 +4,7 @@
 
 - Demo project about spring-boot, spring-webmvc, spring-jpa and spring test
 - Requirements:
-    - Java: Oracle JDK 10
+    - Java: OpenJDK 10
     
 - Project blueprint is in **Blueprint.md** file.
 
@@ -62,7 +62,7 @@ GET http://localhost:8060/api/order-api/v1/customer-total-orders?customerID=2
 ## How to run tests
 
 - To run unit tests, execute this command: `mvn clean test -DskipITs`
-- To run integration tests, execute this command: `mvn clean integration-test -DskipUTs`
+- To run integration tests, execute this command: ` mvn clean integration-test verify -DskipUT`
 
 ## Benchmark performance
 
