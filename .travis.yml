@@ -1,6 +1,6 @@
 language: java
 
-jdk: oraclejdk10
+jdk: openjdk11
 
 cache:
   directories:
