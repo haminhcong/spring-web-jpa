@@ -1,5 +1,7 @@
 # Spring Web Jpa Project
 
+[![Build Status](https://travis-ci.com/haminhcong/spring-web-jpa.svg?branch=master)](https://travis-ci.com/haminhcong/spring-web-jpa)
+
 ## Introduction
 
 - Demo project about spring-boot, spring-webmvc, spring-jpa and spring test
