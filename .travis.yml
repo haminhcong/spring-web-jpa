@@ -1,0 +1,14 @@
+language: java
+
+jdk: oraclejdk10
+
+cache:
+  directories:
+    - $HOME/.m2
+
+jobs:
+  include:
+    - stage: unit tests
+      script: mvn clean test -DskipITs
+    - stage: integration tests
+      script: mvn clean integration-test -DskipUTs
