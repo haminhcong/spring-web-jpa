@@ -13,6 +13,37 @@
 
 
 
+## Spring Application Context cache problem in Spring Integration Test
+
+When using different `MockBean` in Spring Integration Tests, Spring Application Context will be reloaded.
+
+Example: If Integration Test 1 use `MockBean a` and Integration Test 2 use `MockBean b`, 
+then Application Context will be reloaded
+
+But, If Two Integration Tests has Appplication Contexts use same MockBean set, Application Context will be cached between Two tests.
+
+Example: Integration Test 1 use `MockBean a, MockBean b, MockBean c` and 
+Integration Test 2 use `MockBean a, MockBean b, MockBean c`, then Application Context will be cached, which mean reduce tests execution time.
+
+An solution for caching AppContext when switch Test classes is put all MockBeans needed in Some Integration Tests into a Abstract Test Class, then
+each Integration Tests will extends from this Abstract Test class.
+
+Full example of this solution can be seen in here: <https://github.com/OpenLMIS/openlmis-referencedata/commit/1664a7ba274412eec808e4378d27b7427f69eae5>
+
+
+But, careful when use this solution. Mock too many bean can break tests and make each test depends on others tests. 
+Ref: <https://github.com/spring-projects/spring-boot/issues/9511#issuecomment-388984678>
+
+### References:
+  
+- <https://github.com/spring-projects/spring-boot/commit/0f6a13c9b3d4f3a9db50676098c535097cd24e2c>
+- <https://github.com/spring-projects/spring-boot/issues/9511>
+- <https://github.com/spring-projects/spring-boot/issues/7174>
+- <https://github.com/spring-projects/spring-boot-issues/pull/56/files>
+- <https://github.com/spring-projects/spring-boot-issues/pull/59/files>
+- <https://github.com/spring-projects/spring-boot/commit/0f6a13c9b3d4f3a9db50676098c535097cd24e2c>
+
+
 ## @SpringBootTest Datasource config problem.
 
 If you don't config datasource properties for SpringBootTest annotated class, you will get this error:
@@ -209,22 +240,24 @@ public CommandLineRunner loadData(CustomerRepository repository) {
 }
 ```
 
+### Build GET URL for TestRestTemplate in Spring Integration Test
 
+- Ref: <https://www.oodlestechnologies.com/blogs/Learn-To-Make-REST-calls-With-RestTemplate-In-Spring-Boot>
 
-## JPA data tests
+```java
+String transactionUrl = "http://localhost:8080/api/v1/transactions";
 
-- https://stackoverflow.com/questions/48878747/junit-test-cases-for-jpa-repositories
-- https://www.springbyexample.org/examples/contact-test-dao.html
-- https://zsoltfabok.com/blog/2017/04/testing-the-data-access-layer-in-spring-boot/
-- https://krishnasblog.com/2013/02/21/junit-testing-of-spring-mvc-application-testing-dao-layer/
-- https://howtodoinjava.com/best-practices/how-you-should-unit-test-dao-layer/
-- https://stackoverflow.com/questions/9377701/spring-jpa-testing-dao-layer-with-multiple-databases-in-a-ci-environment
+UriComponentsBuilder builder = UriComponentsBuilder
+    .fromUriString(transactionUrl)
+    // Add query parameter
+    .queryParam("pageNumber", "1")
+    .queryParam("walletId", "2323JK")
+    .queryParam("pageSize", "10");
 
-## Unit tests
+RestTemplate restTemplate = new RestTemplate();
+WalletListDTO response = restTemplate.getForObject(builder.toUriString(), walletListDTO.class);
 
-## Integration tests
-
-## Books
-
+```
 
 ## References
+
