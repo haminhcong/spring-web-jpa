@@ -68,6 +68,11 @@ GET http://localhost:8060/api/order-api/v1/customer-total-orders?customerID=2
 - To run unit tests, execute this command: `mvn clean test -DskipITs`
 - To run integration tests, execute this command: ` mvn clean integration-test verify -DskipUT`
 
+## To check code coverage
+ 
+- Execute this command: `mvn clean test org.jacoco:jacoco-maven-plugin:report-aggregate`
+- Open file `code-coverage/target/jacoco-aggregate-report/index.html` by browser to see code coverage report of all modules
+
 ## Benchmark performance
 
 ```bash
