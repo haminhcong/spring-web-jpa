@@ -9,7 +9,7 @@
   <packaging>jar</packaging>
 
   <description>Gateway service</description>
-  
+
   <parent>
     <groupId>spring.web.service</groupId>
     <artifactId>webservice-multi-module</artifactId>
