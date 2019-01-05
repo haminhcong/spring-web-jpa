@@ -9,6 +9,11 @@ cache:
 jobs:
   include:
     - stage: unit tests
-      script: mvn clean test -DskipITs
+      script:
+        - mvn clean test -DskipITs
+        - mvn org.jacoco:jacoco-maven-plugin:report-aggregate
+      after_success:
+        - bash < (curl -s https://codecov.io/bash) -F unittests
     - stage: integration tests
-      script: mvn clean integration-test -DskipUTs
+      script:
+       - mvn clean integration-test -DskipUTs

@@ -4,6 +4,16 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <properties>
+    <java.version>10</java.version>
+  </properties>
+
+  <parent>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-parent</artifactId>
+    <version>Finchley.SR1</version>
+  </parent>
+  
   <groupId>spring.web.service</groupId>
   <artifactId>webservice-multi-module</artifactId>
   <version>1.0.0-SNAPSHOT</version>
@@ -17,5 +27,25 @@
     <!--micro services-->
     <module>customer-service</module>
     <module>order-service</module>
+    <!--code coverage module-->
+    <module>code-coverage</module>
   </modules>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.2</version>
+        <executions>
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+</build>
 </project>
