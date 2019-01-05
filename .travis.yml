@@ -14,6 +14,6 @@ jobs:
         - mvn org.jacoco:jacoco-maven-plugin:report-aggregate
       after_success:
         - bash <(curl -s https://codecov.io/bash) -F unittests
-    - stage: integration tests
+    - stage: component tests
       script:
         - mvn clean integration-test -DskipUTs
