@@ -1,6 +1,8 @@
 # Spring Web Jpa Project
 
-[![Build Status](https://travis-ci.com/haminhcong/spring-web-jpa.svg?branch=master)](https://travis-ci.com/haminhcong/spring-web-jpa)
+[![Build Status](https://travis-ci.com/haminhcong/spring-web-jpa.svg?branch=master)](https://travis-ci.com/haminhcong/spring-web-jpa)  [![codecov](https://codecov.io/gh/haminhcong/spring-web-jpa/branch/master/graph/badge.svg)](https://codecov.io/gh/haminhcong/spring-web-jpa)
+
+
 
 ## Introduction
 
