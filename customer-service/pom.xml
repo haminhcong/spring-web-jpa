@@ -132,7 +132,11 @@
           <skipTests>${skipUTs}</skipTests>
           <includes>
             <include>**/*UnitTest.java</include>
+            <include>**/*RepositoryTest.java</include>
           </includes>
+          <parallel>classes</parallel>
+          <threadCount>10</threadCount>
+          <perCoreThreadCount>true</perCoreThreadCount>
         </configuration>
       </plugin>
 

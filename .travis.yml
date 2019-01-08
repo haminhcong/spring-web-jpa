@@ -8,7 +8,7 @@ cache:
 
 jobs:
   include:
-    - stage: unit tests
+    - stage: unit test, integration test and contract test
       script:
         - mvn clean test -DskipITs
         - mvn org.jacoco:jacoco-maven-plugin:report-aggregate
