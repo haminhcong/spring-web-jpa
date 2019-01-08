@@ -78,7 +78,7 @@ public class CustomerApiComponentTest {
     CustomerDTO customerDTOResponse = customerDTOResponseEntity.getBody();
 
     CustomerDTO customerDTOExpected = new CustomerDTO(
-        "cab", "female", "Ho Chi Minh City", "1231545243", 4);
+        "cab", "female", "Ho Chi Minh City", "1231545243", 3);
     Assert.assertEquals(customerDTOExpected, customerDTOResponse);
 
   }
