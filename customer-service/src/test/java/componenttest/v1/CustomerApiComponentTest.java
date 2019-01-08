@@ -1,4 +1,4 @@
-package integration.v1;
+package componenttest.v1;
 
 import static org.mockito.Mockito.when;
 
@@ -8,13 +8,11 @@ import com.spring.ws.dto.TotalOrdersDTO;
 import com.spring.ws.entity.Customer;
 import com.spring.ws.http_client.OrderV1Client;
 import com.spring.ws.repository.CustomerRepository;
-import integration.IntegrationTest;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,11 +24,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@Category(IntegrationTest.class)
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = com.spring.ws.CustomerServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("integration-test")
-public class CustomerApiIntegrationIT {
+@ActiveProfiles("component-test")
+public class CustomerApiComponentTest {
 
   @Autowired
   private TestRestTemplate restTemplate;
@@ -81,7 +78,7 @@ public class CustomerApiIntegrationIT {
     CustomerDTO customerDTOResponse = customerDTOResponseEntity.getBody();
 
     CustomerDTO customerDTOExpected = new CustomerDTO(
-        "cab", "female", "Ho Chi Minh City", "1231545243", 3);
+        "cab", "female", "Ho Chi Minh City", "1231545243", 4);
     Assert.assertEquals(customerDTOExpected, customerDTOResponse);
 
   }

@@ -66,7 +66,7 @@ GET http://localhost:8060/api/order-api/v1/customer-total-orders?customerID=2
 ## How to run tests
 
 - To run unit tests, execute this command: `mvn clean test -DskipITs`
-- To run integration tests, execute this command: ` mvn clean integration-test verify -DskipUT`
+- To run component tests, execute this command: `mvn clean integration-test verify -DskipUTs`
 
 ## To check code coverage
  

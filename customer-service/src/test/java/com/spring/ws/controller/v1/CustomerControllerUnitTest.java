@@ -27,7 +27,7 @@ import org.springframework.test.web.servlet.MvcResult;
 @RunWith(SpringRunner.class)
 @WebMvcTest(CustomerController.class)
 @ActiveProfiles("controller-unit-test")
-public class CustomerControllerTest {
+public class CustomerControllerUnitTest {
 
   @MockBean
   CustomerService customerService;
