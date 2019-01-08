@@ -11,7 +11,7 @@ jobs:
     - stage: unit test, integration test and contract test
       script:
         - mvn clean test -DskipITs
-        - mvn org.jacoco:jacoco-maven-plugin:report-aggregate
+        - mvn org.jacoco:jacoco-maven-plugin:report
       after_success:
         - bash <(curl -s https://codecov.io/bash) -F unittests
     - stage: component tests
