@@ -10,6 +10,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableFeignClients
 @SpringBootApplication
+//@ComponentScan(basePackages = "com.spring.ws", excludeFilters = @ComponentScan.Filter(
+//    type = FilterType.ASSIGNABLE_TYPE, classes = ExternalServiceRibbonClientConfiguration.class))
 public class CustomerServiceApplication {
 
   public static void main(String[] args) {

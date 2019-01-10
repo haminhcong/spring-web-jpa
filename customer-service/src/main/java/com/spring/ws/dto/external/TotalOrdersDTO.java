@@ -1,4 +1,4 @@
-package com.spring.ws.dto;
+package com.spring.ws.dto.external;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

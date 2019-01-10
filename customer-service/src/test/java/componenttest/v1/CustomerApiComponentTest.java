@@ -2,9 +2,9 @@ package componenttest.v1;
 
 import static org.mockito.Mockito.when;
 
-import com.spring.ws.dto.CustomerDTO;
-import com.spring.ws.dto.CustomerListResponseDTO;
-import com.spring.ws.dto.TotalOrdersDTO;
+import com.spring.ws.dto.response.CustomerDTO;
+import com.spring.ws.dto.response.CustomerListResponseDTO;
+import com.spring.ws.dto.external.TotalOrdersDTO;
 import com.spring.ws.entity.Customer;
 import com.spring.ws.http_client.OrderV1Client;
 import com.spring.ws.repository.CustomerRepository;

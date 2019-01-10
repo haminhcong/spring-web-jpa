@@ -5,9 +5,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.google.gson.Gson;
-import com.spring.ws.dto.CustomerDTO;
-import com.spring.ws.dto.CustomerListResponseDTO;
-import com.spring.ws.dto.HTTPErrorResponseDTO;
+import com.spring.ws.dto.response.CustomerDTO;
+import com.spring.ws.dto.response.CustomerListResponseDTO;
+import com.spring.ws.dto.response.HTTPErrorResponseDTO;
 import com.spring.ws.entity.Customer;
 import com.spring.ws.service.CustomerService;
 import java.util.ArrayList;

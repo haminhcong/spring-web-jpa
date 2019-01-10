@@ -3,9 +3,11 @@ package com.spring.ws.service;
 
 import static org.mockito.Mockito.when;
 
-import com.spring.ws.dto.CustomerDTO;
-import com.spring.ws.dto.TotalOrdersDTO;
+import com.spring.ws.configuration.CustomerServiceProperties;
+import com.spring.ws.dto.response.CustomerDTO;
+import com.spring.ws.dto.external.TotalOrdersDTO;
 import com.spring.ws.entity.Customer;
+import com.spring.ws.http_client.IpStackClient;
 import com.spring.ws.http_client.OrderV1Client;
 import com.spring.ws.repository.CustomerRepository;
 import java.util.ArrayList;
@@ -27,6 +29,12 @@ public class CustomerServiceUnitTest {
   @Mock
   private OrderV1Client orderV1Client;
 
+  @Mock
+  private IpStackClient ipStackClient;
+
+  @Mock
+  private CustomerServiceProperties customerServiceProperties;
+
   private CustomerService customerService;
 
   private List<Customer> customerList = new ArrayList<>();
@@ -35,7 +43,9 @@ public class CustomerServiceUnitTest {
 
   @Before
   public void setUp() {
-    customerService = new CustomerService(this.customerRepository, this.orderV1Client);
+    customerService = new CustomerService(
+        this.customerRepository, this.orderV1Client,
+        this.ipStackClient, this.customerServiceProperties);
     customer1 = new Customer(1L, "ddd", "abcd", "bcd", "male", "Ha Noi", "123132132");
     customer2 = new Customer(2L, "def", "cab", "bcd", "female", "Ho Chi Minh City", "1231545243");
     customerList.add(customer1);

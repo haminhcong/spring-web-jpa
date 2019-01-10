@@ -1,10 +1,13 @@
 package com.spring.ws.controller.v1;
 
-import com.spring.ws.dto.CustomerDTO;
-import com.spring.ws.dto.CustomerListResponseDTO;
+import com.netflix.client.ClientException;
+import com.spring.ws.dto.response.CustomerDTO;
+import com.spring.ws.dto.response.CustomerListResponseDTO;
+import com.spring.ws.dto.response.CustomerLocationInfoDTO;
 import com.spring.ws.entity.Customer;
-import com.spring.ws.exceptions.CustomerServiceDatabaseErrorException;
 import com.spring.ws.exceptions.CustomerNotFoundException;
+import com.spring.ws.exceptions.CustomerServiceDatabaseErrorException;
+import com.spring.ws.exceptions.ExternalServiceErrorException;
 import com.spring.ws.service.CustomerService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -43,12 +46,18 @@ public class CustomerController {
 
   // TODO: Implements API for customer role, this API is for admin role
   @GetMapping(value = "/customers", params = "id")
-  public CustomerDTO getCustomer(@RequestParam("id") Long id) throws CustomerNotFoundException {
+  public CustomerDTO getCustomer(@RequestParam("id") Long id)
+      throws CustomerNotFoundException, ExternalServiceErrorException {
     CustomerDTO customer;
-    try{
+    try {
       customer = customerService.getCustomerDetail(id);
-    }catch (Exception ex){
-      String errorMessage = "Fail to get customer "+ id + ". Reason: " + ex.getMessage();
+    }catch (ExternalServiceErrorException ex) {
+      String errorMessage = "Fail to get customer " + id + ". Reason: " + ex.getMessage();
+      log.error(errorMessage, ex);
+      throw new ExternalServiceErrorException(errorMessage);
+    }
+    catch (Exception ex) {
+      String errorMessage = "Fail to get customer " + id + ". Reason: " + ex.getMessage();
       log.error(errorMessage, ex);
       throw new CustomerServiceDatabaseErrorException(errorMessage);
     }
@@ -57,4 +66,23 @@ public class CustomerController {
     }
     return customer;
   }
+
+  @GetMapping(value = "/customer-geo-info")
+  public CustomerLocationInfoDTO getCustomerGeoInfo(HttpServletRequest req)
+      throws ExternalServiceErrorException {
+
+    String customerIPAddress = req.getHeader("X-FORWARDED-FOR");
+    if (customerIPAddress == null) {
+      customerIPAddress = req.getRemoteAddr();
+    }
+
+    try {
+      return customerService.getCustomerLocationInfoFromIP(customerIPAddress);
+    } catch (Exception e) {
+      String errorMessage = "Fail to get IP " + customerIPAddress + " Info from IP Stack Server";
+      log.error(errorMessage, e);
+      throw new ExternalServiceErrorException(errorMessage);
+    }
+  }
+
 }

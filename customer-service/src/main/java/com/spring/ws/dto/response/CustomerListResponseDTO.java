@@ -1,4 +1,4 @@
-package com.spring.ws.dto;
+package com.spring.ws.dto.response;
 
 import com.spring.ws.entity.Customer;
 import java.util.List;

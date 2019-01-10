@@ -1,6 +1,6 @@
 package com.spring.ws.exceptions;
 
-import com.spring.ws.dto.HTTPErrorResponseDTO;
+import com.spring.ws.dto.response.HTTPErrorResponseDTO;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -26,7 +26,14 @@ public class CustomerServiceExceptionHandler {
   @ExceptionHandler(CustomerServiceDatabaseErrorException.class)
   @ResponseBody HTTPErrorResponseDTO handleCustomerListErrorException(
       HttpServletRequest req, CustomerServiceDatabaseErrorException ex) {
-    log.error(ex.getMessage());
     return new HTTPErrorResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
+  }
+
+  @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+  @ExceptionHandler(ExternalServiceErrorException.class)
+  @ResponseBody HTTPErrorResponseDTO handleExternalServiceErrorException(
+      HttpServletRequest req, ExternalServiceErrorException ex) {
+    String responseMessage = "Service is currently unavailable, try again later";
+    return new HTTPErrorResponseDTO(HttpStatus.SERVICE_UNAVAILABLE.value(), responseMessage);
   }
 }
