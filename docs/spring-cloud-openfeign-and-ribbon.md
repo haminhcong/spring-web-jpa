@@ -7,6 +7,12 @@
 
 ## Use spring cloud openfeign as http connector between spring cloud mircoservices and between spring cloud microservice and external webservice
 
+Refs: 
+
+- https://cloud.spring.io/spring-cloud-openfeign/single/spring-cloud-openfeign.html#netflix-feign-starter
+- https://piotrminkowski.wordpress.com/2018/04/26/quick-guide-to-microservices-with-spring-boot-2-0-eureka-and-spring-cloud/
+- https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-ribbon.html
+- https://stackoverflow.com/questions/38360182/how-to-disable-eureka-lookup-on-specific-feignclient/38360581#38360581
 
 ### Between spring cloud micro services 
 
@@ -80,4 +86,26 @@ ip-stack:
     listOfServers: http://api.ipstack.com
 ```
 
+### Customize Ribbon client
+
+- https://cloud.spring.io/spring-cloud-static/Edgware.SR4/multi/multi_spring-cloud-ribbon.html
+- https://www.oreilly.com/library/view/mastering-spring-cloud/9781788475433/faf8e3d2-f053-4401-bb2b-a5f0e072e80b.xhtml
+
+Working in progress
+
+### Feign client interceptor (need test again)
+
+- https://github.com/spring-cloud/spring-cloud-netflix/issues/2746#issuecomment-430481739
+
+
+### Use openFeign and ribbon without eureka, using kubernetes or consul service discovery instead
+
+Refs:
+
+- https://github.com/spring-cloud/spring-cloud-netflix/issues/1758
+- https://github.com/spring-cloud/spring-cloud-netflix/issues/564
+- https://spring.io/guides/gs/client-side-load-balancing/#_load_balance_across_server_instances
+- https://spring.io/guides/gs/client-side-load-balancing/#_load_balance_across_server_instances
+
+Working in this issue is in progress...
 
