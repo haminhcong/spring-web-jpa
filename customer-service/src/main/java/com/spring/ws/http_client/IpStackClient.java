@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value = "ip-stack")
 public interface IpStackClient {
   @RequestMapping(value = "/{customerIP}", method = RequestMethod.GET)
-  CustomerInfoBasedIpDTO getCustomerOrders(
+  CustomerInfoBasedIpDTO getCustomerInfoBasedIp(
       @PathVariable("customerIP") String customerIP,
       @RequestParam("access_key") String accessKey) throws Exception;
 }

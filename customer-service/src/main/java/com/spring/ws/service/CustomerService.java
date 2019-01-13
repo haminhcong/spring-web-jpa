@@ -1,6 +1,5 @@
 package com.spring.ws.service;
 
-import com.netflix.client.ClientException;
 import com.spring.ws.configuration.CustomerServiceProperties;
 import com.spring.ws.dto.external.CustomerInfoBasedIpDTO;
 import com.spring.ws.dto.external.CustomerLocationDTO;
@@ -8,16 +7,19 @@ import com.spring.ws.dto.response.CustomerDTO;
 import com.spring.ws.dto.external.TotalOrdersDTO;
 import com.spring.ws.dto.response.CustomerLocationInfoDTO;
 import com.spring.ws.entity.Customer;
+import com.spring.ws.exceptions.CustomerServiceDatabaseErrorException;
 import com.spring.ws.exceptions.ExternalServiceErrorException;
 import com.spring.ws.http_client.IpStackClient;
 import com.spring.ws.http_client.OrderV1Client;
 import com.spring.ws.repository.CustomerRepository;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Slf4j
 public class CustomerService {
 
   private CustomerRepository customerRepository;
@@ -43,8 +45,14 @@ public class CustomerService {
     return customerRepository.findAll();
   }
 
-  public CustomerDTO getCustomerDetail(Long id) throws ExternalServiceErrorException {
-    Customer customer = getCustomer(id);
+  public CustomerDTO getCustomerDetail(Long id) throws ExternalServiceErrorException, CustomerServiceDatabaseErrorException {
+    Customer customer;
+    try{
+      customer = getCustomer(id);
+    }catch (Exception e){
+      log.error("Database error", e);
+      throw new CustomerServiceDatabaseErrorException("Fail to get data from database");
+    }
     if (customer == null) {
       return null;
     }
@@ -75,7 +83,7 @@ public class CustomerService {
     if(!isPublicCustomerIP(customerIP)){
       customerIP = customerServiceProperties.getIpStack().getCustomerAddressTestIP();
     }
-    CustomerInfoBasedIpDTO customerInfoBasedIpDTO = ipStackClient.getCustomerOrders(
+    CustomerInfoBasedIpDTO customerInfoBasedIpDTO = ipStackClient.getCustomerInfoBasedIp(
         customerIP, customerServiceProperties.getIpStack().getAccessKey());
     CustomerLocationDTO locationInfo = customerInfoBasedIpDTO.getLocationInfo();
     CustomerLocationInfoDTO customerLocationInfoDTO = new CustomerLocationInfoDTO();

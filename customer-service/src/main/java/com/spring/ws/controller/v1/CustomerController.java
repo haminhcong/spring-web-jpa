@@ -47,7 +47,10 @@ public class CustomerController {
   // TODO: Implements API for customer role, this API is for admin role
   @GetMapping(value = "/customers", params = "id")
   public CustomerDTO getCustomer(@RequestParam("id") Long id)
-      throws CustomerNotFoundException, ExternalServiceErrorException {
+      throws
+      CustomerNotFoundException,
+      ExternalServiceErrorException,
+      CustomerServiceDatabaseErrorException {
     CustomerDTO customer;
     try {
       customer = customerService.getCustomerDetail(id);
@@ -55,8 +58,7 @@ public class CustomerController {
       String errorMessage = "Fail to get customer " + id + ". Reason: " + ex.getMessage();
       log.error(errorMessage, ex);
       throw new ExternalServiceErrorException(errorMessage);
-    }
-    catch (Exception ex) {
+    } catch (CustomerServiceDatabaseErrorException ex) {
       String errorMessage = "Fail to get customer " + id + ". Reason: " + ex.getMessage();
       log.error(errorMessage, ex);
       throw new CustomerServiceDatabaseErrorException(errorMessage);

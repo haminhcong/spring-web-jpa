@@ -117,6 +117,14 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-contract-wiremock</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+
   </dependencies>
 
   <build>
@@ -144,6 +152,7 @@
           <includes>
             <include>**/*UnitTest.java</include>
             <include>**/*RepositoryTest.java</include>
+            <include>**/*ExternalAPITest.java</include>
           </includes>
           <parallel>classes</parallel>
           <threadCount>10</threadCount>

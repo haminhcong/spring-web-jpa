@@ -1,0 +1,47 @@
+{
+  "request": {
+    "urlPath": "/116.101.100.38",
+    "method": "GET",
+    "queryParameters": {
+      "access_key": {
+        "equalTo": "12345"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "ip": "116.101.100.38",
+      "type": "ipv4",
+      "continent_code": "AS",
+      "continent_name": "Asia",
+      "country_code": "VN",
+      "country_name": "Vietnam",
+      "region_code": null,
+      "region_name": null,
+      "city": null,
+      "zip": null,
+      "latitude": 16,
+      "longitude": 106,
+      "location": {
+        "geoname_id": null,
+        "capital": "Hanoi",
+        "languages": [
+          {
+            "code": "vi",
+            "name": "Vietnamese",
+            "native": "Ti\u1ebfng Vi\u1ec7t"
+          }
+        ],
+        "country_flag": "http:\/\/assets.ipstack.com\/flags\/vn.svg",
+        "country_flag_emoji": "\ud83c\uddfb\ud83c\uddf3",
+        "country_flag_emoji_unicode": "U+1F1FB U+1F1F3",
+        "calling_code": "84",
+        "is_eu": false
+      }
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

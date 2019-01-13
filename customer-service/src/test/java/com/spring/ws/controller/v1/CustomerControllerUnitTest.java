@@ -9,6 +9,8 @@ import com.spring.ws.dto.response.CustomerDTO;
 import com.spring.ws.dto.response.CustomerListResponseDTO;
 import com.spring.ws.dto.response.HTTPErrorResponseDTO;
 import com.spring.ws.entity.Customer;
+import com.spring.ws.exceptions.CustomerServiceDatabaseErrorException;
+import com.spring.ws.exceptions.ExternalServiceErrorException;
 import com.spring.ws.service.CustomerService;
 import java.util.ArrayList;
 import java.util.List;
@@ -125,7 +127,7 @@ public class CustomerControllerUnitTest {
     Long customerId =  2L;
     String exceptionMessage =  "database error or order service error";
     when(customerService.getCustomerDetail(customerId)).thenThrow(
-        new Exception("database error or order service error"));
+        new CustomerServiceDatabaseErrorException("database error or order service error"));
     MvcResult response = this.mockMvc
         .perform(
             get("/v1/customers")
