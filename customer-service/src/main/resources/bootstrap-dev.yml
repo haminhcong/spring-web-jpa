@@ -1,27 +1,4 @@
-server:
-  port: 8071
-
 spring:
   cloud:
     config:
       uri: http://localhost:8088
-  transaction:
-    default-timeout: 20
-
-  datasource:
-    hikari:
-      minimumIdle: 5
-      maximumPoolSize: 20
-      idleTimeout: 10000
-      maxLifetime: 2000000
-      connectionTimeout: 10000
-
-ip-stack:
-  ribbon:
-    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
-    listOfServers: http://api.ipstack.com
-
-customer-service:
-  ip-stack:
-    access-key: 65631d011ee8709d193b0acf6711fcee
-    customer-address-test-ip: 116.101.100.38

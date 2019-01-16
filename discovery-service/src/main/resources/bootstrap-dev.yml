@@ -1,6 +1,3 @@
-server:
-  port: 8061
-
 spring:
   cloud:
     config:

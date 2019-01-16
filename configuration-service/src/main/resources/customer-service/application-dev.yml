@@ -1,3 +1,13 @@
+server:
+  port: 8071
+
+management:
+  # TODO: security re-check
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
 eureka:
   client:
     serviceUrl:
@@ -6,6 +16,8 @@ eureka:
     fetchRegistry: true
 
 spring:
+  transaction:
+    default-timeout: 20
   # ===============================
   # = Hibernate datasource
   # ===============================
@@ -13,7 +25,12 @@ spring:
     url: jdbc:mysql://127.0.0.1:3301/customer_database
     username: customer_database
     password: customer_database
-
+    hikari:
+      minimumIdle: 5
+      maximumPoolSize: 20
+      idleTimeout: 10000
+      maxLifetime: 2000000
+      connectionTimeout: 10000
   # ===============================
   # = JPA configurations
   # ===============================
@@ -24,3 +41,23 @@ spring:
     database-platform: MYSQL
     properties:
       hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+ip-stack:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: http://api.ipstack.com
+
+customer-service:
+  ip-stack:
+    access-key: 65631d011ee8709d193b0acf6711fcee
+    customer-address-test-ip: 116.101.100.38
+
+logging:
+  level:
+    com:
+      zaxxer:
+        hikari:
+          HikariConfig: DEBUG
+    org:
+      hibernate:
+        SQL: DEBUG

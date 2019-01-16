@@ -9,6 +9,7 @@ import com.spring.ws.exceptions.CustomerNotFoundException;
 import com.spring.ws.exceptions.CustomerServiceDatabaseErrorException;
 import com.spring.ws.exceptions.ExternalServiceErrorException;
 import com.spring.ws.service.CustomerService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -85,6 +86,18 @@ public class CustomerController {
       log.error(errorMessage, e);
       throw new ExternalServiceErrorException(errorMessage);
     }
+  }
+
+  @GetMapping(value = "/check-memory")
+  public String checkMemory(HttpServletRequest req) throws InterruptedException {
+    StringBuilder stringB = new StringBuilder(8000000); //for the 2mb one
+    String paddingString = "abcdefghijklmnopqrs";
+    while (stringB.length() + paddingString.length() < 8000000)
+      stringB.append(paddingString);
+    log.info(stringB.toString().substring(0,10));
+    Thread.sleep(20000);
+    return "done";
+
   }
 
 }

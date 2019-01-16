@@ -1,6 +1,22 @@
+server:
+  port: 8061
+
+management:
+  # TODO: security re-check
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
 eureka:
+  datacenter: cloud
+  environment: dev
+  instance:
+    hostname: localhost
+    appname: spring-web-jpa
+    prefer-ip-address: true
   client:
     registerWithEureka: false
     fetchRegistry: false
-    service-url:
-      defaultZone: http://localhost:8061/eureka
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
