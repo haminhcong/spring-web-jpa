@@ -1,6 +1,5 @@
 package com.spring.ws.controller.v1;
 
-import com.netflix.client.ClientException;
 import com.spring.ws.dto.response.CustomerDTO;
 import com.spring.ws.dto.response.CustomerListResponseDTO;
 import com.spring.ws.dto.response.CustomerLocationInfoDTO;
@@ -9,7 +8,6 @@ import com.spring.ws.exceptions.CustomerNotFoundException;
 import com.spring.ws.exceptions.CustomerServiceDatabaseErrorException;
 import com.spring.ws.exceptions.ExternalServiceErrorException;
 import com.spring.ws.service.CustomerService;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +53,7 @@ public class CustomerController {
     CustomerDTO customer;
     try {
       customer = customerService.getCustomerDetail(id);
-    }catch (ExternalServiceErrorException ex) {
+    } catch (ExternalServiceErrorException ex) {
       String errorMessage = "Fail to get customer " + id + ". Reason: " + ex.getMessage();
       log.error(errorMessage, ex);
       throw new ExternalServiceErrorException(errorMessage);
@@ -92,9 +90,10 @@ public class CustomerController {
   public String checkMemory(HttpServletRequest req) throws InterruptedException {
     StringBuilder stringB = new StringBuilder(8000000); //for the 2mb one
     String paddingString = "abcdefghijklmnopqrs";
-    while (stringB.length() + paddingString.length() < 8000000)
+    while (stringB.length() + paddingString.length() < 8000000) {
       stringB.append(paddingString);
-    log.info(stringB.toString().substring(0,10));
+    }
+    log.info(stringB.toString().substring(0, 10));
     Thread.sleep(20000);
     return "done";
 

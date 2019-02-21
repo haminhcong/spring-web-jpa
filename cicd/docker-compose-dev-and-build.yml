@@ -1,0 +1,58 @@
+version: '3.2'
+
+services:
+  configuration-service:
+    build:
+      context: ../configuration-service
+      args:
+        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+    command: ["--spring.profiles.active=dev,native"]
+    entrypoint: ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9001", "-Djava.security.egd=file:///dev/urandom","-jar", "/app/configuration-service.jar"]
+    healthcheck:
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      test: ["CMD", "curl", "-f", "http://localhost:8088/actuator/health"]
+
+  discovery-service:
+    build:
+      context: ../discovery-service
+      args:
+        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+    command: ["--spring.profiles.active=dev"]
+    entrypoint: ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9002", "-Djava.security.egd=file:///dev/urandom","-jar", "/app/discovery-service.jar"]
+    healthcheck:
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      test: ["CMD", "curl", "-f", "http://localhost:8061/actuator/health"]
+
+  gateway-service:
+    build:
+      context: ../gateway-service
+      args:
+        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+    command: ["--spring.profiles.active=dev"]
+    entrypoint: ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9003", "-Djava.security.egd=file:///dev/urandom","-jar", "/app/gateway-service.jar"]
+
+
+  customer-service:
+    build:
+      context: ../customer-service
+      args:
+        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+    command: ["--spring.profiles.active=dev"]
+    entrypoint: ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9004", "-Djava.security.egd=file:///dev/urandom","-jar", "/app/customer-service.jar"]
+
+  order-service:
+    build:
+      context: ../order-service
+      args:
+        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+    entrypoint: ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9005", "-Djava.security.egd=file:///dev/urandom","-jar", "/app/order-service.jar"]
+    command: ["--spring.profiles.active=dev"]
+    healthcheck:
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      test: ["CMD", "curl", "-f", "http://localhost:8072/actuator/health"]

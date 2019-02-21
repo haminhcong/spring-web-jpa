@@ -1,3 +1,13 @@
 spring:
   application:
     name: gateway-service
+  cloud:
+    config:
+      uri: http://127.0.0.1:8088
+      fail-fast: true
+      request-read-timeout: 10000
+      retry:
+        multiplier: 1.5
+        initialInterval: 5000
+        maxAttempts: 100
+        maxInterval: 60000

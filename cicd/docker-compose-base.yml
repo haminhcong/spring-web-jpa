@@ -1,0 +1,53 @@
+version: '3.2'
+
+volumes:
+  services_logs: {}
+
+services:
+  configuration-service:
+    image: "${IMAGE_REGISTRY_URL}/spring-web-jpa/${IMAGE_TYPE}/configuration-service:${CONFIGURATION_SERVICE_VERSION}"
+    container_name: configuration-service
+    network_mode: "host"
+    volumes: ['services_logs:/app/log']
+    restart: always
+
+  discovery-service:
+    image: "${IMAGE_REGISTRY_URL}/spring-web-jpa/${IMAGE_TYPE}/discovery-service:${DISCOVERY_SERVICE_VERSION}"
+    container_name: discovery-service
+    network_mode: "host"
+    volumes: ['services_logs:/app/log']
+    depends_on:
+      - configuration-service
+    restart: always
+
+  gateway-service:
+    image: "${IMAGE_REGISTRY_URL}/spring-web-jpa/${IMAGE_TYPE}/gateway-service:${GATEWAY_SERVICE_VERSION}"
+    container_name: gateway-service
+    network_mode: "host"
+    volumes: ['services_logs:/app/log']
+    depends_on:
+      - configuration-service
+      - discovery-service
+    restart: always
+
+  customer-service:
+    image: "${IMAGE_REGISTRY_URL}/spring-web-jpa/${IMAGE_TYPE}/customer-service:${CUSTOMER_SERVICE_VERSION}"
+    container_name: customer-service
+    network_mode: "host"
+    volumes: ['services_logs:/app/log']
+    depends_on:
+      - configuration-service
+      - discovery-service
+    restart: always
+
+
+
+  order-service:
+    image: "${IMAGE_REGISTRY_URL}/spring-web-jpa/${IMAGE_TYPE}/order-service:${ORDER_SERVICE_VERSION}"
+    container_name: order-service
+    network_mode: "host"
+    volumes: ['services_logs:/app/log']
+    depends_on:
+      - configuration-service
+      - discovery-service
+    restart: always
