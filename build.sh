@@ -75,15 +75,13 @@ sub_stack-clean() {
 }
 
 _docker_mvn() {
-    docker run -i --rm \
-        --user $(id -u):$(id -g) \
-        -v $HOME/.m2:/var/maven/.m2:rw \
+    docker run -ti --rm \
+        -v ~/.m2:/var/maven/.m2 \
         -e MAVEN_CONFIG=/var/maven/.m2 \
-        -v $PWD:$PWD:rw \
-        -w $PWD \
-        -u $(id -u ${USER}):$(id -g ${USER}) \
+        -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven \
+        -u $(id -u ${USER}) \
         maven:3.5.3-jdk-10 \
-        mvn clean $@
+        mvn -Duser.home=/var/maven  clean $@
 }
 
 
