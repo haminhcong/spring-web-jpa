@@ -1,3 +1,6 @@
+server:
+  port: 8072
+
 eureka:
   client:
     serviceUrl:
@@ -6,6 +9,10 @@ eureka:
     fetchRegistry: true
 
 spring:
+  cloud:
+    config:
+      allowOverride: true
+      overrideSystemProperties: false
   # ===============================
   # = Hibernate datasource
   # ===============================

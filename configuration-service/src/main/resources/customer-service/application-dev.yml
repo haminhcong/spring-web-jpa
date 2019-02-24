@@ -16,6 +16,10 @@ eureka:
     fetchRegistry: true
 
 spring:
+  cloud:
+    config:
+      allowOverride: true
+      overrideSystemProperties: false
   transaction:
     default-timeout: 20
   # ===============================

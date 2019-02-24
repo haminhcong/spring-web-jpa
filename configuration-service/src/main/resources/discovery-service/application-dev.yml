@@ -1,6 +1,12 @@
 server:
   port: 8061
 
+spring:
+  cloud:
+    config:
+      allowOverride: true
+      overrideSystemProperties: false
+
 management:
   # TODO: security re-check
   endpoints:
